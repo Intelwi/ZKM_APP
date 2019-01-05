@@ -14,13 +14,13 @@ ALTER TABLE Zarzad_Komunikacji_Miejskiej ADD CONSTRAINT Nr_Zarzadu_PK PRIMARY KE
 
 CREATE TABLE Pracownicy(
 Nr_Pracownika Integer NOT NULL,
-Imię Varchar2(20 ) NOT NULL,
+Imie Varchar2(20 ) NOT NULL,
 Nazwisko Varchar2(40 ) NOT NULL,
 Miejscowosc Varchar2(30 ) NOT NULL,
 Ulica Varchar2(50 ),
 Nr_Budynku Varchar2(5 ) NOT NULL,
 Nr_Lokalu Varchar2(5 ),
-27Nr_Telefonu Varchar2(16 ) NOT NULL,
+Nr_Telefonu Varchar2(16 ) NOT NULL,
 Data_Urodzenia Date,
 Data_Zatrudnienia Date NOT NULL,
 Nr_Zarzadu Integer NOT NULL,
@@ -247,3 +247,22 @@ ALTER TABLE Bilety ADD CONSTRAINT Sklep_sprzedaje FOREIGN KEY (Nr_sklepu) REFERE
 ALTER TABLE Modele ADD CONSTRAINT Produkuje_modele FOREIGN KEY (Nr_producenta) REFERENCES Producenci (Nr_producenta);
 
 ALTER TABLE Pojazdy ADD CONSTRAINT ma_model FOREIGN KEY (Nr_modelu) REFERENCES Modele (Nr_modelu);
+
+
+drop table "MSTOLARZ"."AUTOMATY" cascade constraints; 
+drop table "MSTOLARZ"."BILETY" cascade constraints ;
+drop table "MSTOLARZ"."KURSY" cascade constraints ;
+drop table "MSTOLARZ"."LINIA_ZAWIERA" cascade constraints; 
+drop table "MSTOLARZ"."LINIE" cascade constraints ;
+drop table "MSTOLARZ"."MODELE" cascade constraints; 
+drop table "MSTOLARZ"."NA_LINII_KURSUJE" cascade constraints ;
+drop table "MSTOLARZ"."POCZTY" cascade constraints ;
+drop table "MSTOLARZ"."POJAZDY" cascade constraints ;
+drop table "MSTOLARZ"."PRODUCENCI" cascade constraints ;
+drop table "MSTOLARZ"."PRZYSTANKI" cascade constraints ;
+drop table "MSTOLARZ"."PUNKTY_SRZEDAZY_BILETOW" cascade constraints ;
+drop table "MSTOLARZ"."SKLEPY" cascade constraints ;
+drop table "MSTOLARZ"."STANOWISKA" cascade constraints ;
+drop table "MSTOLARZ"."WYNAGRODZENIA" cascade constraints ;
+drop table "MSTOLARZ"."ZARZAD_KOMUNIKACJI_MIEJSKIEJ" cascade constraints ;
+drop table "MSTOLARZ"."PRACOWNICY" cascade constraints ;
