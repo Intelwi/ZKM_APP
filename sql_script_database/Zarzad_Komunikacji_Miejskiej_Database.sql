@@ -249,6 +249,23 @@ ALTER TABLE Modele ADD CONSTRAINT Produkuje_modele FOREIGN KEY (Nr_producenta) R
 ALTER TABLE Pojazdy ADD CONSTRAINT ma_model FOREIGN KEY (Nr_modelu) REFERENCES Modele (Nr_modelu);
 
 
+
+
+
+/* Wstawiane danych */
+/*
+INSERT INTO POCZTY VALUES (1,'03-769','Kielce');
+INSERT INTO ZARZAD_KOMUNIKACJI_MIEJSKIEJ VALUES (1,'ZKM KIELCE','Barszczewska','12','123456789','zkmkielce@zkmkielce.pl','1');
+*/
+
+/* Pobieranie danych */
+/*
+SELECT Nr_poczty, Kod_pocztowy, Poczta FROM POCZTY;
+SELECT Nr_zarzadu, Nazwa_zarzadu, Ulica, Nr_budynku, Nr_telefonu, Email, Nr_poczty FROM Zarzad_komunikacji_miejskiej;
+*/
+
+/* Kasowanie tabel */
+/*
 drop table "MSTOLARZ"."AUTOMATY" cascade constraints; 
 drop table "MSTOLARZ"."BILETY" cascade constraints ;
 drop table "MSTOLARZ"."KURSY" cascade constraints ;
@@ -266,3 +283,4 @@ drop table "MSTOLARZ"."STANOWISKA" cascade constraints ;
 drop table "MSTOLARZ"."WYNAGRODZENIA" cascade constraints ;
 drop table "MSTOLARZ"."ZARZAD_KOMUNIKACJI_MIEJSKIEJ" cascade constraints ;
 drop table "MSTOLARZ"."PRACOWNICY" cascade constraints ;
+*/
