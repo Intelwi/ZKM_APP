@@ -1,20 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Klasa glowna.
  */
 package ztm_app;
-
-/**
- *
- * @author Dawid Gruszczyński
- * Michał Stolarz
- */
 
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-
+/**
+ *
+ * @author Dawid Gruszczyński, Michał Stolarz
+ */
 public class ZTM_App {
 
     /**
@@ -25,8 +20,8 @@ public class ZTM_App {
         Statement stmt = null;
         ResultSet rs =null;
         String DB_URL = "jdbc:oracle:thin:@ora3.elka.pw.edu.pl:1521:ora3inf";
-        String DB_USER = "ktos";
-        String DB_PASS = "ktos";
+        String DB_USER = "nie_podam"; //tu podaj swoj login do bazy danych
+        String DB_PASS = "nie_podam"; //tu podaj swoje haslo do bazy danych
         String statement = "SELECT Nr_poczty, Kod_pocztowy, Poczta FROM POCZTY";
 
         
@@ -46,9 +41,9 @@ public class ZTM_App {
             rs = stmt.executeQuery(statement);
 
              while(rs.next()){                 
-                System.out.print(rs.getInt(1));            
-                System.out.print(rs.getString(2));            
-                System.out.print(rs.getString(2));                            
+                System.out.println(rs.getInt(1));            
+                System.out.println(rs.getString(2));            
+                System.out.println(rs.getString(3));                            
             }
         }
         
