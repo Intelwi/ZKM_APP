@@ -31,7 +31,13 @@ public class PocztyTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Poczta poczta = new Poczta();
+        poczta = pocztyList.get(rowIndex);
+        switch(columnIndex){
+            case 0: return poczta.getNrPoczty();
+            case 1: return poczta.getKodPocztowy();
+            case 2: return poczta.getPoczta();
+        }
+        return "null";
     }
-    
 }
