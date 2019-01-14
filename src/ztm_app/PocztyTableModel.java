@@ -40,4 +40,9 @@ public class PocztyTableModel extends AbstractTableModel{
         }
         return "null";
     }
+
+    @Override
+    public String getColumnName(int index) {
+        return columnName[index];
+    }
 }
