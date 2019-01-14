@@ -12,10 +12,10 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PocztyTableModel extends AbstractTableModel{
 
-    private List<Poczta> pocztyList;
+    private List<Poczty> pocztyList;
     private String[] columnName = {"Nr poczty","Kod pocztowy","Poczta"};
     
-    public PocztyTableModel(List<Poczta> pocztyList){
+    public PocztyTableModel(List<Poczty> pocztyList){
         this.pocztyList = pocztyList;
     }
     
@@ -31,7 +31,7 @@ public class PocztyTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Poczta poczta = new Poczta();
+        Poczty poczta = new Poczty();
         poczta = pocztyList.get(rowIndex);
         switch(columnIndex){
             case 0: return poczta.getNrPoczty();

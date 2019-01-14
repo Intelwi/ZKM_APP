@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Dawid Gruszczyński, Michał Stolarz
  */
-public class Poczta {
+public class Poczty {
     private Integer NrPoczty;
     private String KodPocztowy;
     private String Poczta;
@@ -40,8 +40,8 @@ public class Poczta {
         this.Poczta = Poczta;
     }
     
-    public List<Poczta> getAll(Connection conn) throws SQLException {
-        List <Poczta> pocztyList = new ArrayList();
+    public List<Poczty> getAll(Connection conn) throws SQLException {
+        List <Poczty> pocztyList = new ArrayList();
         Statement stmt = null;
         ResultSet rs =null;
         
@@ -50,7 +50,7 @@ public class Poczta {
         rs = stmt.executeQuery(statement);
         
         while(rs.next()){
-                Poczta poczta = new Poczta();
+                Poczty poczta = new Poczty();
                 poczta.setNrPoczty(rs.getInt(1));            
                 poczta.setKodPocztowy(rs.getString(2));            
                 poczta.setPoczta(rs.getString(3));

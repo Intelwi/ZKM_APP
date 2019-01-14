@@ -20,8 +20,8 @@ public class ZTM_App {
         Statement stmt = null;
         ResultSet rs =null;
         String DB_URL = "jdbc:oracle:thin:@ora3.elka.pw.edu.pl:1521:ora3inf";
-        String DB_USER = "nie_podam"; //tu podaj swoj login do bazy danych
-        String DB_PASS = "nie_podam"; //tu podaj swoje haslo do bazy danych
+        String DB_USER = "#"; //tu podaj swoj login do bazy danych
+        String DB_PASS = "#"; //tu podaj swoje haslo do bazy danych
         String statement = "SELECT Nr_poczty, Kod_pocztowy, Poczta FROM POCZTY";
 
         
