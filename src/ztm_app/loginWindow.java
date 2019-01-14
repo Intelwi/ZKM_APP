@@ -118,7 +118,14 @@ public class loginWindow extends javax.swing.JFrame {
 
         try{
             conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
-            JOptionPane.showMessageDialog(null,"Pomyślnie zalagowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Pomyślnie zalogowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
+             /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new basicApp(conn).setVisible(true);
+                }
+            });
+            this.dispose();
         }
         
         catch(SQLException e){
