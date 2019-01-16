@@ -26,16 +26,20 @@ public class basicApp extends javax.swing.JFrame {
     }
     public basicApp(Connection conn, Integer nr_pracownika) {
         this.conn = conn;
+        initComponents();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        String sql = "select imie, nazwisko from pracownicy where nr_pracownika = ?";
+        String sql = "select imię, nazwisko from pracownicy where nr_pracownika = ?";
         try{
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, nr_pracownika);
             rs = stmt.executeQuery();
+            while (rs.next()){
+                userNameLabel.setText(rs.getString(1) + " " + rs.getString(2));
+            }
         } catch (SQLException exc){
+            userNameLabel.setText("Something went wrong...");
         }
-        initComponents();
     }
     
     /**
@@ -88,9 +92,8 @@ public class basicApp extends javax.swing.JFrame {
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(loggedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
         );
 
         choiceLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -131,6 +134,7 @@ public class basicApp extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        mainTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tablePane.setViewportView(mainTable);
 
         searchButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\DAWID\\Desktop\\search.jpg")); // NOI18N
@@ -195,7 +199,7 @@ public class basicApp extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
