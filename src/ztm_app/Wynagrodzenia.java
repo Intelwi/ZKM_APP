@@ -6,6 +6,7 @@
 package ztm_app;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -84,6 +85,29 @@ public class Wynagrodzenia {
                 
                 wynagrodzeniaList.add(wynagrodzenie);
             }
+        
+        return wynagrodzeniaList;
+    }
+    
+    public List<Wynagrodzenia> getRestrictedPracownik(Connection conn, Integer ID) throws SQLException {
+        List<Wynagrodzenia> wynagrodzeniaList = new ArrayList();
+        Wynagrodzenia wynagrodzenie = new Wynagrodzenia();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        String statement = "SELECT * FROM WYNAGRODZENIA WHERE NR_PRACOWNIKA = ?";
+        stmt = conn.prepareStatement(statement);
+        stmt.setInt(1, ID);
+        rs = stmt.executeQuery();
+        rs.next();
+                    
+        wynagrodzenie.setNrWynagrodzenia(rs.getInt(1));            
+        wynagrodzenie.setKwotaPodstawowa(rs.getFloat(2));            
+        wynagrodzenie.setPremia(rs.getFloat(3));
+        wynagrodzenie.setDataWynagrodzenia(rs.getString(4));
+        wynagrodzenie.setNrPracownika(rs.getInt(5));
+                
+        wynagrodzeniaList.add(wynagrodzenie);
         
         return wynagrodzeniaList;
     }
