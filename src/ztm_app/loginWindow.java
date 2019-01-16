@@ -17,7 +17,17 @@ public class loginWindow extends javax.swing.JFrame {
     /**
      * Creates new form loginWindow
      */
-    Connection conn;
+    private Connection conn;
+    private String DB_URL = "jdbc:oracle:thin:@ora3.elka.pw.edu.pl:1521:ora3inf";
+    private String DB_USER = "dgruszcz";
+    private String DB_PASS = "dgruszcz";
+    
+    private String pracownikLogin = "prac";
+    private String pracownikPass = "prac";
+    private Integer pracownikID = 1;
+    
+    private String adminLogin = "admin";
+    private String adminPass = "admin";
     
     public loginWindow() {
         initComponents();
@@ -110,29 +120,33 @@ public class loginWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_loginTextFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String DB_USER, DB_PASS;
-        DB_USER = loginTextField.getText().trim();
-        DB_PASS = passwordTextField.getText().trim();
-        conn = null;
-        String DB_URL = "jdbc:oracle:thin:@ora3.elka.pw.edu.pl:1521:ora3inf";
 
-        try{
-            conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
-            JOptionPane.showMessageDialog(null,"Pomyślnie zalogowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
-             /* Create and display the form */
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new basicApp(conn).setVisible(true);
-                }
-            });
-            this.dispose();
-        }
+        String login, pass;
+        login = loginTextField.getText().trim();
+        pass = passwordTextField.getText().trim();
+        conn = null;
+
+        if (login.equals(pracownikLogin) && pass.equals(pracownikPass))
+        {
+            try{
+                conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
+                JOptionPane.showMessageDialog(null,"Pomyślnie zalogowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
+                /* Create and display the form */
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new basicApp(conn, pracownikID).setVisible(true);
+                    }
+                });
+                this.dispose();
+            }
         
-        catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Failed to connect user: " + DB_USER + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
+            catch(SQLException e){
+                JOptionPane.showMessageDialog(null,"Failed to connect user: " + DB_USER + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
+            }
+            
+            loginTextField.setText("");
+            passwordTextField.setText("");
         }
-        loginTextField.setText("");
-        passwordTextField.setText("");
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

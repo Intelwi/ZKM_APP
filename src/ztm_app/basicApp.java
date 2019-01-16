@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
  * @author DAWID
  */
 public class basicApp extends javax.swing.JFrame {
-
     /**
      * Creates new form basicApp
      */
