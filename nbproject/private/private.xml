@@ -3,12 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/WBD/ProjectPart2/ZKM_APP/src/ztm_app/PocztyTableModel.java</file>
-            <file>file:/E:/WBD/ProjectPart2/ZKM_APP/src/ztm_app/Pracownicy.java</file>
-            <file>file:/E:/WBD/ProjectPart2/ZKM_APP/src/ztm_app/basicApp.java</file>
-            <file>file:/E:/WBD/ProjectPart2/ZKM_APP/src/ztm_app/ZTM_App.java</file>
-            <file>file:/E:/WBD/ProjectPart2/ZKM_APP/src/ztm_app/loginWindow.java</file>
-            <file>file:/E:/WBD/ProjectPart2/ZKM_APP/src/ztm_app/PocztyJFrame.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/Pracownicy.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/WynagrodzeniaTableModel.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/PocztyJFrame.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/PocztyTableModel.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/Poczty.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/basicApp.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/Stanowiska.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/PracownicyTableModel.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/loginWindow.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/ZTM_App.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/ZKMTableModel.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/Wynagrodzenia.java</file>
+            <file>file:/home/micha/NetBeansProjects/ZTM_App/src/ztm_app/StanowiskaTableModel.java</file>
         </group>
     </open-files>
 </project-private>
