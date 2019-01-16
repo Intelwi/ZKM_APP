@@ -16,6 +16,7 @@ public class basicApp extends javax.swing.JFrame {
      * Creates new form basicApp
      */
     private Connection conn;
+    private Integer pracownikID;
     Integer option = 0;
     public basicApp() {
         initComponents();
@@ -26,6 +27,7 @@ public class basicApp extends javax.swing.JFrame {
     }
     public basicApp(Connection conn, Integer nr_pracownika) {
         this.conn = conn;
+        this.pracownikID = nr_pracownika;
         initComponents();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -213,7 +215,7 @@ public class basicApp extends javax.swing.JFrame {
     private void personalDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalDataButtonActionPerformed
         option = 0;
         try{
-            mainTable.setModel(new PracownicyTableModel(new Pracownicy().getAll(conn)));
+            mainTable.setModel(new PracownicyTableModel(new Pracownicy().getRestrictedPracownik(conn, pracownikID)));
         } catch(SQLException exc){
             JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
         }

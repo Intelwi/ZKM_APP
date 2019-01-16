@@ -168,7 +168,8 @@ public class Pracownicy {
         return pracownicyList;
     }
     
-    public Pracownicy getRestrictedPracownik(Connection conn, Integer ID) throws SQLException {
+    public List<Pracownicy> getRestrictedPracownik(Connection conn, Integer ID) throws SQLException {
+        List<Pracownicy> pracownicyList = new ArrayList();
         Pracownicy pracownik = new Pracownicy();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -193,6 +194,7 @@ public class Pracownicy {
         pracownik.setNrPoczty(rs.getInt(12));
         pracownik.setNrStanowiska(rs.getInt(13));
         
-        return pracownik;
+        pracownicyList.add(pracownik);
+        return pracownicyList;
     }
 }
