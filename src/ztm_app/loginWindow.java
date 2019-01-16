@@ -142,7 +142,7 @@ public class loginWindow extends javax.swing.JFrame {
             }
         
             catch(SQLException e){
-                JOptionPane.showMessageDialog(null,"Failed to connect user: " + pracownikLogin + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Failed to connect user: " + login + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
         
@@ -152,7 +152,7 @@ public class loginWindow extends javax.swing.JFrame {
         }
         
         else {
-            JOptionPane.showMessageDialog(null,"Failed to connect user: " + pracownikLogin + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Failed to connect user: " + login + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 

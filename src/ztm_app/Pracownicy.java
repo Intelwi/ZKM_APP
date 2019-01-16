@@ -6,6 +6,7 @@
 package ztm_app;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -165,5 +166,33 @@ public class Pracownicy {
             }
         
         return pracownicyList;
+    }
+    
+    public Pracownicy getRestrictedPracownik(Connection conn, Integer ID) throws SQLException {
+        Pracownicy pracownik = new Pracownicy();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        String statement = "SELECT * FROM PRACOWNICY WHERE NR_PRACOWNIKA = ?";
+        stmt = conn.prepareStatement(statement);
+        stmt.setInt(1, ID);
+        rs = stmt.executeQuery();
+        rs.next();
+        
+        pracownik.setNrPracownika(rs.getInt(1));            
+        pracownik.setImie(rs.getString(2));            
+        pracownik.setNazwisko(rs.getString(3));
+        pracownik.setMiejscowosc(rs.getString(4));
+        pracownik.setUlica(rs.getString(5));
+        pracownik.setNrBudynku(rs.getString(6));
+        pracownik.setNrLokalu(rs.getString(7));
+        pracownik.setNrTelefonu(rs.getString(8));
+        pracownik.setDataUrodzenia(rs.getString(9));
+        pracownik.setDataZatrudnienia(rs.getString(10));
+        pracownik.setNrZarzadu(rs.getInt(11));
+        pracownik.setNrPoczty(rs.getInt(12));
+        pracownik.setNrStanowiska(rs.getInt(13));
+        
+        return pracownik;
     }
 }
