@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -63,6 +64,25 @@ public class Stanowiska {
                 stanowiskaList.add(stanowisko);
             }
         
+        return stanowiskaList;
+    }
+    public List<Stanowiska> getRestrictedStanowisko(Connection conn, Integer ID) throws SQLException {
+        List<Stanowiska> stanowiskaList = new ArrayList();
+        Stanowiska stanowisko = new Stanowiska();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        String statement = "SELECT * FROM STANOWISKA WHERE NR_STANOWISKA = (SELECT nr_stanowiska from pracownicy where nr_pracownika = ?)";
+        stmt = conn.prepareStatement(statement);
+        stmt.setInt(1, ID);
+        rs = stmt.executeQuery();
+        rs.next();
+        
+        stanowisko.setNrStanowiska(rs.getInt(1));            
+        stanowisko.setNazwaStanowiska(rs.getString(2));
+        stanowisko.setOpis(rs.getString(3));
+        
+        stanowiskaList.add(stanowisko);
         return stanowiskaList;
     }
 }

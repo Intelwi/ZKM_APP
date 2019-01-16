@@ -32,6 +32,7 @@ public class basicApp extends javax.swing.JFrame {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         String sql = "select imię, nazwisko from pracownicy where nr_pracownika = ?";
+
         try{
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, nr_pracownika);
@@ -39,6 +40,7 @@ public class basicApp extends javax.swing.JFrame {
             while (rs.next()){
                 userNameLabel.setText(rs.getString(1) + " " + rs.getString(2));
             }
+            mainTable.setModel(new PracownicyTableModel(new Pracownicy().getRestrictedPracownik(conn, pracownikID)));
         } catch (SQLException exc){
             userNameLabel.setText("Something went wrong...");
         }
@@ -102,6 +104,7 @@ public class basicApp extends javax.swing.JFrame {
         choiceLabel.setText("Wybierz informacje jakie chcesz wyszukać:");
 
         choiceGroup.add(personalDataButton);
+        personalDataButton.setSelected(true);
         personalDataButton.setText("Dane osobowe");
         personalDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,13 +237,13 @@ public class basicApp extends javax.swing.JFrame {
         try{
             switch (option){
                 case 0:
-                    mainTable.setModel(new PracownicyTableModel(new Pracownicy().getAll(conn)));
+                    mainTable.setModel(new PracownicyTableModel(new Pracownicy().getRestrictedPracownik(conn, pracownikID)));
                     break;
                 case 1:
                     //mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
                     break;
                 case 2:
-                    //mainTable.setModel(new StanowiskaTableModel(new Stanowiska().getAll(conn)));
+                    mainTable.setModel(new StanowiskaTableModel(new Stanowiska().getRestrictedStanowisko(conn, pracownikID)));
                     break;
             }
         } catch(SQLException exc){
@@ -250,11 +253,11 @@ public class basicApp extends javax.swing.JFrame {
 
     private void stanowiskoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stanowiskoButtonActionPerformed
         option = 2;
-        //try{
-            //mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
-        //} catch(SQLException exc){
-            //JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
-        //}
+        try{
+            mainTable.setModel(new StanowiskaTableModel(new Stanowiska().getRestrictedStanowisko(conn, pracownikID)));
+        } catch(SQLException exc){
+            JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_stanowiskoButtonActionPerformed
 
     /**
