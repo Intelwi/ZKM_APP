@@ -89,7 +89,7 @@ public class Wynagrodzenia {
         return wynagrodzeniaList;
     }
     
-    public List<Wynagrodzenia> getRestrictedPracownik(Connection conn, Integer ID) throws SQLException {
+    public List<Wynagrodzenia> getRestrictedWynagrodzenie(Connection conn, Integer ID) throws SQLException {
         List<Wynagrodzenia> wynagrodzeniaList = new ArrayList();
         Wynagrodzenia wynagrodzenie = new Wynagrodzenia();
         PreparedStatement stmt = null;
