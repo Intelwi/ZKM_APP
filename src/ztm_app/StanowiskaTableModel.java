@@ -5,6 +5,7 @@
  */
 package ztm_app;
 
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -13,19 +14,36 @@ import javax.swing.table.AbstractTableModel;
  */
 public class StanowiskaTableModel extends AbstractTableModel{
 
+    private List<Stanowiska> stanowiskaList;
+    private String[] columnName = {"Nr stanowiska","Nazwa stanowiska","Opis"};
+    
+    public StanowiskaTableModel(List<Stanowiska> stanowiskaList){
+        this.stanowiskaList = stanowiskaList;
+    }
+    
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return stanowiskaList.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return columnName.length;
     }
     
+     @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        Stanowiska stanowisko = new Stanowiska();
+        stanowisko = stanowiskaList.get(rowIndex);
+        switch(columnIndex){
+            case 0: return stanowisko.getNrStanowiska();
+            case 1: return stanowisko.getNazwaStanowiska();
+            case 2: return stanowisko.getOpis();
+        }
+        return "null";
+    }
+    @Override
+    public String getColumnName(int index) {
+        return columnName[index];
+    }    
 }

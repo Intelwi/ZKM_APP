@@ -5,6 +5,7 @@
  */
 package ztm_app;
 
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -13,19 +14,39 @@ import javax.swing.table.AbstractTableModel;
  */
 public class WynagrodzeniaTableModel extends AbstractTableModel{
 
+    private List<Wynagrodzenia> wynagrodzeniaList;
+    private String[] columnName = {"Nr wynagrodzenia","Kwota podstawowa","Premia","Data wynagrodzenia","Nr pracownika"};
+    
+    public WynagrodzeniaTableModel(List<Stanowiska> stanowiskaList){
+        this.wynagrodzeniaList = wynagrodzeniaList;
+    }
+    
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return wynagrodzeniaList.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return columnName.length;
     }
-
-    @Override
+    
+     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Wynagrodzenia wynagrodzenie = new Wynagrodzenia();
+        wynagrodzenie = wynagrodzeniaList.get(rowIndex);
+        switch(columnIndex){
+            case 0: return wynagrodzenie.getNrWynagrodzenia();
+            case 1: return wynagrodzenie.getKwotaPodstawowa();
+            case 2: return wynagrodzenie.getPremia();
+            case 3: return wynagrodzenie.getDataWynagrodzenia();
+            case 4: return wynagrodzenie.getNrPracownika();
+        }
+        return "null";
     }
+    @Override
+    public String getColumnName(int index) {
+        return columnName[index];
+    }    
     
 }
