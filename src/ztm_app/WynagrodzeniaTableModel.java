@@ -17,7 +17,7 @@ public class WynagrodzeniaTableModel extends AbstractTableModel{
     private List<Wynagrodzenia> wynagrodzeniaList;
     private String[] columnName = {"Nr wynagrodzenia","Kwota podstawowa","Premia","Data wynagrodzenia","Nr pracownika"};
     
-    public WynagrodzeniaTableModel(List<Stanowiska> stanowiskaList){
+    public WynagrodzeniaTableModel(List<Wynagrodzenia> wynagrodzeniaList){
         this.wynagrodzeniaList = wynagrodzeniaList;
     }
     

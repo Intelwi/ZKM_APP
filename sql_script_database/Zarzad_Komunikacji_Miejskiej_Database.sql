@@ -252,6 +252,73 @@ ALTER TABLE Pojazdy ADD CONSTRAINT ma_model FOREIGN KEY (Nr_modelu) REFERENCES M
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO Zarzad_komunikac(Nr_pojazdu, Typ_pojazdu, Data_ostatniego_przegladu, Data_zakupu, Nr_zarzadu, Nr_modelu) 
+    Values(1, 'AUTOBUS', '2010-10-12', '1985-12-24', 1, 1);
+
+
+INSERT INTO Pojazdy (Nr_pojazdu, Typ_pojazdu, Data_ostatniego_przegladu, Data_zakupu, Nr_zarzadu, Nr_modelu) 
+    Values(2, 'AUTOBUS', '2010-10-12', '1985-12-24', 1, 1);
+
+INSERT INTO Modele (Nr_modelu, Nazwa, Opis, Nr_producenta) 
+    Values('3', 'A8', Null, Null);
+    
+INSERT INTO Poczty (Nr_poczty, Kod_pocztowy, Poczta) Values ('2', '01-223', 'Warszawa');
+
+INSERT INTO Poczty (Nr_poczty, Kod_pocztowy, Poczta) Values ('3', '12-423', 'Krakow');
+
+update poczty set poczta = 'Kraków'
+where Poczta = 'Krakow';
+
+INSERT INTO Zarzad_komunikacji_miejskiej (Nr_zarzadu, Nazwa_zarzadu, Ulica, Nr_budynku, Nr_telefonu, Email, Nr_poczty) 
+    Values('1', 'ZKM', 'Rudnickiego', '5', '123456789', 'zkm@zkm.pl','1');
+    
+INSERT INTO Pracownicy (nr_pracownika, imiê, nazwisko, miejscowosc, ulica, nr_budynku, nr_lokalu, nr_telefonu, data_urodzenia, data_zatrudnienia, nr_zarzadu, nr_poczty, nr_stanowiska) 
+    Values(1, 'Krzysztof', 'Nowak', 'Warszawa', 'Radosna', 22, 5, '223455782', '1985-10-22', '2007-05-12',1, 2, 2) ;
+INSERT INTO Pracownicy (nr_pracownika, imiê, nazwisko, miejscowosc, ulica, nr_budynku, nr_lokalu, nr_telefonu, data_urodzenia, data_zatrudnienia, nr_zarzadu, nr_poczty, nr_stanowiska) 
+    Values(2, 'Adam', 'Nowak', 'Warszawa', 'Smutna', 12, 20, '513453582', '1988-11-12', '2009-10-12',1, 2, 1) ;
+
+INSERT INTO Pracownicy (nr_pracownika, imiê, nazwisko, miejscowosc, ulica, nr_budynku, nr_lokalu, nr_telefonu, data_urodzenia, data_zatrudnienia, nr_zarzadu, nr_poczty, nr_stanowiska) 
+    Values(3, 'Krystyna', 'Krzeszowska', 'Kraków', 'Kapryœna', 52, 2, '113653512', '1985-06-25', '2014-02-17',1, 3, 3) ;
+    
+INSERT INTO Pracownicy (nr_pracownika, imiê, nazwisko, miejscowosc, ulica, nr_budynku, nr_lokalu, nr_telefonu, data_urodzenia, data_zatrudnienia, nr_zarzadu, nr_poczty, nr_stanowiska) 
+    Values(4, 'Asia', 'Malanowska', 'Warszawa', 'Blondw³osa', 325, 12, '643453512', '1993-06-25', '2018-12-21',1, 2, 3) ;
+    
+INSERT INTO Pracownicy (nr_pracownika, imiê, nazwisko, miejscowosc, ulica, nr_budynku, nr_lokalu, nr_telefonu, data_urodzenia, data_zatrudnienia, nr_zarzadu, nr_poczty, nr_stanowiska) 
+    Values(5, 'Wies³aw', 'Keras', 'Kielce', 'Osobliwa', 53, 93, '623457282', '1979-04-03', '2015-11-15',1, 1, 1) ;
+
+INSERT INTO Stanowiska (Nr_stanowiska, nazwa_stanowiska, Opis) Values ('3', 'Ksiegowa', NULL);
+
+select * from pracownicy
+
+commit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Wstawiane danych */
 /*
 INSERT INTO POCZTY VALUES (1,'03-769','Kielce');

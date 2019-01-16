@@ -226,11 +226,12 @@ public class basicApp extends javax.swing.JFrame {
 
     private void salaryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryButtonActionPerformed
         option = 1;
-        //try{
-            //mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
-        //} catch(SQLException exc){
-            //JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
-        //}
+        try{
+            mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getRestrictedWynagrodzenie(conn, pracownikID)));
+        } catch(SQLException exc){
+            System.err.println(exc);
+            JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_salaryButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -240,7 +241,7 @@ public class basicApp extends javax.swing.JFrame {
                     mainTable.setModel(new PracownicyTableModel(new Pracownicy().getRestrictedPracownik(conn, pracownikID)));
                     break;
                 case 1:
-                    //mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
+                    mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getRestrictedWynagrodzenie(conn, pracownikID)));
                     break;
                 case 2:
                     mainTable.setModel(new StanowiskaTableModel(new Stanowiska().getRestrictedStanowisko(conn, pracownikID)));
