@@ -197,4 +197,46 @@ public class Pracownicy {
         pracownicyList.add(pracownik);
         return pracownicyList;
     }
+    
+    int updatePracownik(Connection conn, Pracownicy prac) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "UPDATE Pracownicy set Imię = ?, Nazwisko = ?, Miejscowosc = ?, Ulica = ?, Nr_budynku = ?, Nr_lokalu = ?, Nr_telefonu = ?, data_urodzenia = ?, data_zatrudnienia = ?, nr_zarzadu = ?, nr_poczty = ?, nr_stanowiska = ? WHERE nr_pracownika = ?";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setString(1, prac.Imie);
+            stmt.setString(2, prac.Nazwisko);
+            stmt.setString(3, prac.Miejscowosc);
+            stmt.setString(4, prac.Miejscowosc);
+            stmt.setString(5, prac.Ulica);
+            stmt.setString(6, prac.NrBudynku);
+            stmt.setString(7, prac.NrLokalu);
+            stmt.setString(8, prac.NrTelefonu);
+            stmt.setString(9, prac.DataUrodzenia);
+            stmt.setString(10, prac.DataZatrudnienia);
+            stmt.setInt(11, prac.NrZarzadu);
+            stmt.setInt(12, prac.NrPoczty);
+            stmt.setInt(13, prac.NrPracownika);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
+    
+    int deletePracownik(Connection conn, Integer ID) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "DELETE FROM Pracownicy WHERE nr_pracownika = ?";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setInt(1, ID);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
 }

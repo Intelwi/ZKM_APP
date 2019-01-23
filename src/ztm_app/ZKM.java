@@ -102,4 +102,27 @@ public class ZKM {
         
         return zkmList;
     }
+    
+    int updateZarzad(Connection conn, ZKM zkm) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "UPDATE Zarzad_komunikacji_miejskiej set nazwa_zarzadu = ?, ulica = ?, nr_budynku = ?, nr_telefonu = ?, email = ?, nr_poczty = ? WHERE nr_zarzadu = ?";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setString(1, zkm.NazwaZarzadu);
+            stmt.setString(2, zkm.Ulica);
+            stmt.setString(3, zkm.NrBudynku);
+            stmt.setString(4, zkm.NrTelefonu);
+            stmt.setString(5, zkm.Email);
+            stmt.setInt(6, zkm.NrPoczty);
+            stmt.setInt(7, zkm.NrZarzadu);
+   
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
+   
 }

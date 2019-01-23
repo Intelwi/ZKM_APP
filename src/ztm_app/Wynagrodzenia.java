@@ -111,4 +111,38 @@ public class Wynagrodzenia {
         
         return wynagrodzeniaList;
     }
+    
+    int updateWynagrodzenie(Connection conn, Wynagrodzenia wyn) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "UPDATE Wynagrodzenia set kwota_postawowa = ?, premia = ?, data_wynagrodzenia = ?, nr_pracownika = ? WHERE nr_wynagrodzenia = ?";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setFloat(1, wyn.KwotaPodstawowa);
+            stmt.setFloat(2, wyn.Premia);
+            stmt.setString(3, wyn.DataWynagrodzenia);
+            stmt.setInt(4, wyn.NrPracownika);
+            stmt.setInt(5, wyn.NrWynagrodzenia);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
+    
+    int deleteWynagrodzenie(Connection conn, Integer ID) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "DELETE FROM Wynagrodzenia WHERE nr_wynagrodzenia = ?";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setInt(1, ID);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
 }
