@@ -23,11 +23,13 @@ public class basicApp extends javax.swing.JFrame {
     public basicApp() {
         initComponents();
         this.setResizable(false);
+        setLocation(300, 200);
     }
     public basicApp(Connection conn) {
         this.conn = conn;
         initComponents();
         this.setResizable(false);
+        setLocation(300, 200);
         
     }
     public basicApp(Connection conn, Integer nr_pracownika) {
@@ -50,6 +52,7 @@ public class basicApp extends javax.swing.JFrame {
             userNameLabel.setText("Something went wrong...");
         }
         this.setResizable(false);
+        setLocation(300, 200);
     }
     
     /**

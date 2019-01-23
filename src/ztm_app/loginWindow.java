@@ -31,7 +31,8 @@ public class loginWindow extends javax.swing.JFrame {
     
     public loginWindow() {
         initComponents();
-        this.setResizable(false);
+        this.setLocation(600, 200);
+          
     }
 
     /**
@@ -46,24 +47,20 @@ public class loginWindow extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         loginLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        passwordTextField = new javax.swing.JTextField();
         loginTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
+        passwordTextField = new javax.swing.JPasswordField();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Logowanie do bazy danych");
+        setLocationByPlatform(true);
+        setResizable(false);
 
         loginLabel.setText("Login:");
 
         passwordLabel.setText("Hasło:");
-
-        passwordTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordTextFieldActionPerformed(evt);
-            }
-        });
 
         loginTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,18 +75,24 @@ public class loginWindow extends javax.swing.JFrame {
             }
         });
 
+        passwordTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(passwordTextField)
+                    .addComponent(loginButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(loginTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                         .addComponent(loginLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -102,19 +105,15 @@ public class loginWindow extends javax.swing.JFrame {
                 .addComponent(loginTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(loginButton)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordTextFieldActionPerformed
 
     private void loginTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginTextFieldActionPerformed
         // TODO add your handling code here:
@@ -131,7 +130,6 @@ public class loginWindow extends javax.swing.JFrame {
         {
             try{
                 conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
-                JOptionPane.showMessageDialog(null,"Pomyślnie zalogowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
                 
                 /* Create and display the form */
                 java.awt.EventQueue.invokeLater(new Runnable() {
@@ -150,7 +148,7 @@ public class loginWindow extends javax.swing.JFrame {
         else if (login.equals(adminLogin) && pass.equals(adminPass)) {
             try{
                 conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
-                JOptionPane.showMessageDialog(null,"Pomyślnie zalogowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null,"Pomyślnie zalogowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
                 
                 /* Create and display the form */
                 java.awt.EventQueue.invokeLater(new Runnable() {
@@ -169,6 +167,10 @@ public class loginWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Failed to connect user: " + login + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void passwordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,6 +213,6 @@ public class loginWindow extends javax.swing.JFrame {
     private javax.swing.JLabel loginLabel;
     private javax.swing.JTextField loginTextField;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JTextField passwordTextField;
+    private javax.swing.JPasswordField passwordTextField;
     // End of variables declaration//GEN-END:variables
 }

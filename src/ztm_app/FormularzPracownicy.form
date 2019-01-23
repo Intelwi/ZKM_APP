@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -139,7 +140,7 @@
                                           <Component id="nrPracownikaLabel" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                           <Component id="imieLabel" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -148,7 +149,6 @@
                                                               <Group type="102" alignment="1" attributes="0">
                                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                                       <Group type="102" alignment="1" attributes="0">
-                                                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                                               <Group type="102" alignment="1" attributes="0">
                                                                                   <Component id="nazwiskoLabel" min="-2" max="-2" attributes="0"/>

@@ -34,6 +34,7 @@ public class adminWindow extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.adminForm = this;
+        this.setLocation(350, 200);
         refreshTable();
         
     }
@@ -88,7 +89,7 @@ public class adminWindow extends javax.swing.JFrame {
                     .addGroup(topPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
                 .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -229,7 +230,7 @@ public class adminWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void refreshTable() {
+    public void refreshTable() {
         try{
             switch (option){
                 case 0:
@@ -249,19 +250,19 @@ public class adminWindow extends javax.swing.JFrame {
     }
     
     private void createPracownikForm(Integer maxID, Boolean isToAdd){
-        this.setEnabled(false);
+        //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularzPracownicy(maxID,adminForm,isToAdd).setVisible(true);
+                new FormularzPracownicy(conn, maxID,adminForm,isToAdd).setVisible(true);
             }
         });    
     }
     
     private void createPracownikForm(Pracownicy pracownik, Boolean isToAdd){
-        this.setEnabled(false);
+        //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularzPracownicy(pracownik,adminForm,isToAdd).setVisible(true);
+                new FormularzPracownicy(conn, pracownik,adminForm,isToAdd).setVisible(true);
             }
         });    
     }
@@ -322,12 +323,11 @@ public class adminWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Wystąpił nieoczekiwany błąd połączenia","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            for (int i = 0; i < pracownicyList.size() - 1; ++i){
+            for (int i = 0; i < pracownicyList.size(); ++i){
                 if (pracownicyList.get(i).getNrPracownika() > maxID){
                     maxID = pracownicyList.get(i).getNrPracownika();
                 }
             }
-            prac.setNrPracownika(maxID + 1);
             createPracownikForm(maxID+1,true);
             
             
@@ -356,7 +356,7 @@ public class adminWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Wystąpił nieoczekiwany błąd połączenia","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            for (int i = 0; i < wynagrodzeniaList.size() - 1; ++i){
+            for (int i = 0; i < wynagrodzeniaList.size(); ++i){
                 if (wynagrodzeniaList.get(i).getNrWynagrodzenia()> maxID){
                     maxID = wynagrodzeniaList.get(i).getNrWynagrodzenia();
                 }
