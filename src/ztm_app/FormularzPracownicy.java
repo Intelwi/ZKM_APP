@@ -5,6 +5,8 @@
  */
 package ztm_app;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author micha
@@ -143,7 +145,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
                                                 .addComponent(nrPracownikaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(7, 7, 7)
                                                 .addComponent(imieLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGap(10, 10, 10)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -152,7 +154,6 @@ public class FormularzPracownicy extends javax.swing.JFrame {
                                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                                                .addGap(10, 10, 10)
                                                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                                                         .addComponent(nazwiskoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,6 +205,11 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         infoLabel.setText("Dodawanie/Modyfikacja rekordu w tabeli pracowniców");
 
         commitButton.setText("Commit");
+        commitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -242,6 +248,28 @@ public class FormularzPracownicy extends javax.swing.JFrame {
     private void ulicaLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ulicaLabelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ulicaLabelActionPerformed
+
+    private void commitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitButtonActionPerformed
+        Pracownicy prac = new Pracownicy();
+        prac.setNrBudynku(budynekLabel.getText().trim());
+        prac.setImie(imieLabel.getText().trim());
+        prac.setNazwisko(nazwiskoLabel.getText().trim());
+        prac.setNrLokalu(lokalLabel.getText().trim());
+        prac.setNrPoczty(Integer.parseInt(nrPocztyLabel.getText().trim()));
+        prac.setNrPracownika(Integer.parseInt(nrPracownikaLabel.getText().trim()));
+        prac.setNrStanowiska(Integer.parseInt(nrStanowiskaLabel.getText().trim()));
+        prac.setNrZarzadu(Integer.parseInt(nrZarzadLabel.getText().trim()));
+        prac.setNrTelefonu(telefonLabel.getText().trim());
+        prac.setUlica(ulicaLabel.getText().trim());
+        prac.setDataUrodzenia(urodzenieLabel.getText().trim());
+        prac.setDataZatrudnienia(zatrudnienieLabel.getText().trim());
+        if (prac.getNrBudynku().length() == 0 || prac.getImie().length() == 0 || prac.getNazwisko().length() == 0 || prac.getNrPoczty() <= 0 || prac.getNrStanowiska() <= 0 || prac.getNrZarzadu() <= 0 || prac.getNrTelefonu().length() == 0 || prac.getDataZatrudnienia().length() == 0){
+            JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (prac.getUlica().length() == 0) prac.setUlica("NULL");
+        if (prac.getNrLokalu().length() == 0) prac.setNrLokalu("NULL");
+        if (prac.getDataUrodzenia().length() == 0) prac.setDataUrodzenia("NULL");
+    }//GEN-LAST:event_commitButtonActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author micha
+ * @author micha płatków
  */
 public class WynagrodzeniaTableModel extends AbstractTableModel{
 
