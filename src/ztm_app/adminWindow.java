@@ -34,6 +34,8 @@ public class adminWindow extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.adminForm = this;
+        refreshTable();
+        
     }
 
     /**
