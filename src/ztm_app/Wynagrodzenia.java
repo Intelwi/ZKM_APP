@@ -112,7 +112,7 @@ public class Wynagrodzenia {
         return wynagrodzeniaList;
     }
     
-    int updateWynagrodzenie(Connection conn, Wynagrodzenia wyn) throws SQLException {
+    int updateWynagrodzenie(Connection conn, Wynagrodzenia wyn){
         PreparedStatement stmt = null;
         int result;
         
@@ -131,7 +131,7 @@ public class Wynagrodzenia {
         return result;
     }
     
-    int deleteWynagrodzenie(Connection conn, Integer ID) throws SQLException {
+    int deleteWynagrodzenie(Connection conn, Integer ID){
         PreparedStatement stmt = null;
         int result;
         

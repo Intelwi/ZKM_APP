@@ -181,6 +181,11 @@ public class adminWindow extends javax.swing.JFrame {
         });
 
         DeleteButton.setText("Usuń");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -280,16 +285,79 @@ public class adminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButton2ActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
-        // TODO add your handling code here:
+        if (option == 0){
+            Pracownicy prac = new Pracownicy();
+            int i = mainTable2.getSelectedRow();
+            if (i < 0){
+                JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            prac = (Pracownicy)mainTable2.getValueAt(i, -1);
+            // Wywolanie okna i update po zatwierdzeniu
+        } else if (option == 1){
+            ZKM zkm = new ZKM();
+            int i = mainTable2.getSelectedRow();
+            if (i < 0){
+                JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            zkm = (ZKM)mainTable2.getValueAt(i, -1);
+            // Wywolanie okna i update po zatwierdzeniu
+        } else if (option == 2){
+            Wynagrodzenia wyn = new Wynagrodzenia();
+            int i = mainTable2.getSelectedRow();
+            if (i < 0){
+                JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            wyn = (Wynagrodzenia)mainTable2.getValueAt(i, -1);
+            // Wywolanie okna i update po zatwierdzeniu
+        }
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
        // option = this.getSelectedIndex();
     }//GEN-LAST:event_jComboBoxActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        if (option == 0){
+            Pracownicy prac = new Pracownicy();
+            int i = mainTable2.getSelectedRow();
+            Integer ID;
+            if (i < 0){
+                JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ID = (Integer)mainTable2.getValueAt(i, 0);
+            
+            if (prac.deletePracownik(conn, ID) == 1){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie usunięty","Sukces!",JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,"Nie udało się usunąć rekordu, sprawdź połączenie z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        } else if (option == 1){
+             JOptionPane.showMessageDialog(this,"Nie można usunąć zarządu, rozważ modyfikację","Error",JOptionPane.INFORMATION_MESSAGE);
+        } else if (option == 2){
+            Wynagrodzenia wyn = new Wynagrodzenia();
+            int i = mainTable2.getSelectedRow();
+            Integer ID;
+            if (i < 0){
+                JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ID = (Integer)mainTable2.getValueAt(i, 0);
+            // Wywolanie okna i update po zatwierdzeniu
+            if (wyn.deleteWynagrodzenie(conn, ID) == 1){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie usunięty","Sukces!",JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,"Nie udało się usunąć rekordu, sprawdź połączenie z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments

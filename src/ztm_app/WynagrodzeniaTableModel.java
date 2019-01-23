@@ -47,6 +47,9 @@ public class WynagrodzeniaTableModel extends AbstractTableModel{
     @Override
     public String getColumnName(int index) {
         return columnName[index];
-    }    
+    }  
+    public Wynagrodzenia getRow(int index) {
+        return wynagrodzeniaList.get(index);
+    } 
     
 }
