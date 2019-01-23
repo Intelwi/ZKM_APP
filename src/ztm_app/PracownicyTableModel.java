@@ -34,6 +34,9 @@ public class PracownicyTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Pracownicy pracownik = new Pracownicy();
         pracownik = pracownicyList.get(rowIndex);
+        if(columnIndex == -1){
+            return pracownik;
+        }
         switch(columnIndex){
             case 0: return pracownik.getNrPracownika();
             case 1: return pracownik.getImie();
@@ -49,10 +52,11 @@ public class PracownicyTableModel extends AbstractTableModel{
             case 11: return pracownik.getNrPoczty();
             case 12: return pracownik.getNrStanowiska();
         }
+        
         return "null";
     }
     @Override
     public String getColumnName(int index) {
         return columnName[index];
-    }    
+    }       
 }

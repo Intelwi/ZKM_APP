@@ -125,7 +125,7 @@ public class ZKM {
         return result;
     }
     
-     int addZarzad(Connection conn, ZKM zkm) throws SQLException {
+     int addZarzad(Connection conn, ZKM zkm){
         PreparedStatement stmt = null;
         int result;
         

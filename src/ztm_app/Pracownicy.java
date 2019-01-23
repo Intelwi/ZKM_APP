@@ -198,7 +198,7 @@ public class Pracownicy {
         return pracownicyList;
     }
     
-    int updatePracownik(Connection conn, Pracownicy prac) throws SQLException {
+    int updatePracownik(Connection conn, Pracownicy prac){
         PreparedStatement stmt = null;
         int result;
         
@@ -226,7 +226,7 @@ public class Pracownicy {
         return result;
     }
     
-    int deletePracownik(Connection conn, Integer ID) throws SQLException {
+    int deletePracownik(Connection conn, Integer ID){
         PreparedStatement stmt = null;
         int result;
         
@@ -241,7 +241,7 @@ public class Pracownicy {
         return result;
     }
     
-    int addPracownik(Connection conn, Pracownicy prac) throws SQLException {
+    int addPracownik(Connection conn, Pracownicy prac){
         PreparedStatement stmt = null;
         int result;
         

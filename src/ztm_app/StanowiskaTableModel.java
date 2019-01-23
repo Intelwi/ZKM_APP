@@ -45,5 +45,8 @@ public class StanowiskaTableModel extends AbstractTableModel{
     @Override
     public String getColumnName(int index) {
         return columnName[index];
-    }    
+    }  
+    public Stanowiska getRow(int index) {
+        return stanowiskaList.get(index);
+    } 
 }
