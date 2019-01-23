@@ -35,6 +35,9 @@ public class WynagrodzeniaTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Wynagrodzenia wynagrodzenie = new Wynagrodzenia();
         wynagrodzenie = wynagrodzeniaList.get(rowIndex);
+        if(columnIndex == -1){
+            return wynagrodzenie;
+        }
         switch(columnIndex){
             case 0: return wynagrodzenie.getNrWynagrodzenia();
             case 1: return wynagrodzenie.getKwotaPodstawowa();
