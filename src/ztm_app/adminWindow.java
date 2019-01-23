@@ -268,7 +268,7 @@ public class adminWindow extends javax.swing.JFrame {
     }
     
     private void createWynagrodzenieForm(Integer maxID, Boolean isToAdd){
-        this.setEnabled(false);
+        //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormularzWynagrodzenia(maxID,adminForm,isToAdd).setVisible(true);
@@ -277,7 +277,7 @@ public class adminWindow extends javax.swing.JFrame {
     }
     
     private void createWynagrodzenieForm(Wynagrodzenia wynagrodzenie, Boolean isToAdd){
-        this.setEnabled(false);
+        //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormularzWynagrodzenia(wynagrodzenie,adminForm,isToAdd).setVisible(true);

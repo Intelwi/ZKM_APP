@@ -18,10 +18,12 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
     
     public FormularzWynagrodzenia() {
         initComponents();
+        this.setLocationRelativeTo(adminFormular);
     }
 
     public FormularzWynagrodzenia(Integer ID, adminWindow admin, Boolean isToAdd) {
         initComponents();
+        this.setLocationRelativeTo(adminFormular);
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrWynagrodzeniaLabel.setText(ID.toString());
@@ -29,6 +31,7 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
     
     public FormularzWynagrodzenia(Wynagrodzenia wyn, adminWindow admin, Boolean isToAdd) {
         initComponents();
+        this.setLocationRelativeTo(adminFormular);
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrWynagrodzeniaLabel.setText(wyn.getNrPracownika().toString());
@@ -64,8 +67,9 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
         nrPracownikaLabel = new javax.swing.JTextField();
         commitButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(450, 320));
+        setResizable(false);
 
         infoLabel.setText("Dodawanie/Modyfikacja rekordu w tabeli wynagrodzeń");
 

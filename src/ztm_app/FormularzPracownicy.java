@@ -295,6 +295,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         
         if (budynekLabel.getText().trim().isEmpty() || imieLabel.getText().trim().isEmpty() || nazwiskoLabel.getText().trim().isEmpty() || nrPocztyLabel.getText().trim().isEmpty() || nrStanowiskaLabel.getText().trim().isEmpty() || nrZarzadLabel.getText().trim().isEmpty() || telefonLabel.getText().trim().isEmpty() || zatrudnienieLabel.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
         if (ulicaLabel.getText().trim().isEmpty()) prac.setUlica("NULL");
         if (lokalLabel.getText().trim().isEmpty()) prac.setNrLokalu("NULL");
@@ -313,14 +314,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         prac.setDataUrodzenia(urodzenieLabel.getText().trim());
         prac.setDataZatrudnienia(zatrudnienieLabel.getText().trim());
         //prac.setMiejscowosc(miejscowoscLabel.getText().trim());
-        
-        if (prac.getNrBudynku().length() == 0 || prac.getImie().length() == 0 || prac.getNazwisko().length() == 0 || prac.getNrPoczty() <= 0 || prac.getNrStanowiska() <= 0 || prac.getNrZarzadu() <= 0 || prac.getNrTelefonu().length() == 0 || prac.getDataZatrudnienia().length() == 0 || prac.getMiejscowosc().length() == 0){
-            JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
-        }
-        if (prac.getUlica().length() == 0) prac.setUlica("NULL");
-        if (prac.getNrLokalu().length() == 0) prac.setNrLokalu("NULL");
-        if (prac.getDataUrodzenia().length() == 0) prac.setDataUrodzenia("NULL");
-        prac.setMiejscowosc("Warszawa");
+        prac.setMiejscowosc("Warszawa"); // To do wykasowania jak linia powyzej bedzie gotowa
         
         if (isToAdd){
             if (prac.addPracownik(conn, prac) != 0){
