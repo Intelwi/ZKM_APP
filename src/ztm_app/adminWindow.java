@@ -6,9 +6,8 @@
 package ztm_app;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -219,6 +218,25 @@ public class adminWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void refreshTable() {
+        try{
+            switch (option){
+                case 0:
+                mainTable2.setModel(new PracownicyTableModel(new Pracownicy().getAll(conn)));
+                break;
+                case 1:
+                mainTable2.setModel(new ZKMTableModel(new ZKM().getAll(conn)));
+                break;
+                case 2:
+                mainTable2.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
+                break;
+            }
+        }
+        catch(SQLException exc){
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
         Integer userOption;
         userOption = JOptionPane.showConfirmDialog(this, "Na pewno chcesz się wylogować?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -261,22 +279,7 @@ public class adminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_logOutButtonActionPerformed
 
     private void searchButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton2ActionPerformed
-        try{
-            switch (option){
-                case 0:
-                mainTable2.setModel(new PracownicyTableModel(new Pracownicy().getAll(conn)));
-                break;
-                case 1:
-                mainTable2.setModel(new ZKMTableModel(new ZKM().getAll(conn)));
-                break;
-                case 2:
-                mainTable2.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
-                break;
-            }
-        }
-        catch(SQLException exc){
-            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
-        }
+        refreshTable();
     }//GEN-LAST:event_searchButton2ActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
@@ -288,7 +291,9 @@ public class adminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
-       // option = this.getSelectedIndex();
+       
+        option = ((JComboBox)evt.getSource()).getSelectedIndex();
+        refreshTable();
     }//GEN-LAST:event_jComboBoxActionPerformed
 
     /**
