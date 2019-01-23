@@ -245,7 +245,7 @@ public class Pracownicy {
         PreparedStatement stmt = null;
         int result;
         
-        String statement = "INSERT INTO Pracownicy VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String statement = "INSERT INTO Pracownicy VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             stmt = conn.prepareStatement(statement);
             stmt.setInt(1, prac.NrPracownika);

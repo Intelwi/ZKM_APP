@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ztm_app;
+import java.sql.*;
 
 import javax.swing.JOptionPane;
 
@@ -18,20 +19,25 @@ public class FormularzPracownicy extends javax.swing.JFrame {
      */
     private adminWindow adminFormular; 
     private Boolean isToAdd;
+    private Connection conn;
     
     public FormularzPracownicy() {
         initComponents();
+        this.setLocationRelativeTo(adminFormular);
     }
 
-    public FormularzPracownicy(Integer ID, adminWindow admin, Boolean isToAdd) {
+    public FormularzPracownicy(Connection conn, Integer ID, adminWindow admin, Boolean isToAdd) {
         initComponents();
+        this.conn = conn;
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrPracownikaLabel.setText(ID.toString());
+        this.setLocationRelativeTo(adminFormular);
     }
     
-    public FormularzPracownicy(Pracownicy pracownik, adminWindow admin, Boolean isToAdd) {
+    public FormularzPracownicy(Connection conn, Pracownicy pracownik, adminWindow admin, Boolean isToAdd) {
         initComponents();
+        this.conn = conn;
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrPracownikaLabel.setText(pracownik.getNrPracownika().toString());
@@ -41,11 +47,13 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         budynekLabel.setText(pracownik.getNrBudynku());
         lokalLabel.setText(pracownik.getNrLokalu());
         telefonLabel.setText(pracownik.getNrTelefonu());
-        urodzenieLabel.setText(pracownik.getDataUrodzenia());
-        zatrudnienieLabel.setText(pracownik.getDataZatrudnienia());
+        urodzenieLabel.setText(pracownik.getDataUrodzenia().substring(0, 10));
+        zatrudnienieLabel.setText(pracownik.getDataZatrudnienia().substring(0, 10));
         nrZarzadLabel.setText(pracownik.getNrZarzadu().toString());
         nrPocztyLabel.setText(pracownik.getNrPoczty().toString());
         nrStanowiskaLabel.setText(pracownik.getNrStanowiska().toString());
+        //miejscowoscLabel.setText(pracownik.getMiejscowosc().toString());
+        this.setLocationRelativeTo(adminFormular);
     }
     
     
@@ -89,6 +97,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         commitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setText("Nr pracownika");
 
@@ -229,6 +238,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
                     .addComponent(nrStanowiskaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addContainerGap(14, Short.MAX_VALUE))
+
         );
 
         infoLabel.setText("Dodawanie/Modyfikacja rekordu w tabeli pracowniców");
@@ -303,7 +313,32 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         prac.setUlica(ulicaLabel.getText().trim());
         prac.setDataUrodzenia(urodzenieLabel.getText().trim());
         prac.setDataZatrudnienia(zatrudnienieLabel.getText().trim());
+        //prac.setMiejscowosc(miejscowoscLabel.getText().trim());
         
+        if (prac.getNrBudynku().length() == 0 || prac.getImie().length() == 0 || prac.getNazwisko().length() == 0 || prac.getNrPoczty() <= 0 || prac.getNrStanowiska() <= 0 || prac.getNrZarzadu() <= 0 || prac.getNrTelefonu().length() == 0 || prac.getDataZatrudnienia().length() == 0 || prac.getMiejscowosc().length() == 0){
+            JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (prac.getUlica().length() == 0) prac.setUlica("NULL");
+        if (prac.getNrLokalu().length() == 0) prac.setNrLokalu("NULL");
+        if (prac.getDataUrodzenia().length() == 0) prac.setDataUrodzenia("NULL");
+        prac.setMiejscowosc("Warszawa");
+        
+        if (isToAdd){
+            if (prac.addPracownik(conn, prac) != 0){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie dodany do bazy danych","Sukces",JOptionPane.INFORMATION_MESSAGE);
+                adminFormular.setEnabled(true);
+                this.dispose();
+            } else 
+                JOptionPane.showMessageDialog(this,"Nie udało się dodać rekordu do bazy danych","Błąd",JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (prac.updatePracownik(conn, prac) != 0){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie zmodyfikowany","Sukces",JOptionPane.INFORMATION_MESSAGE);
+                adminFormular.setEnabled(true);
+                this.dispose();
+            } else 
+                JOptionPane.showMessageDialog(this,"Nie udało się zmodyfikować rekordu","Błąd",JOptionPane.WARNING_MESSAGE);
+        }
+        adminFormular.refreshTable();
         
     }//GEN-LAST:event_commitButtonActionPerformed
 

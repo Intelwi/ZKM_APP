@@ -76,7 +76,7 @@
                           <Component id="userNameLabel" min="-2" pref="336" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="221" max="32767" attributes="0"/>
+                  <EmptySpace pref="416" max="32767" attributes="0"/>
                   <Component id="logOutButton" min="-2" pref="117" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
