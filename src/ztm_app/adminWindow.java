@@ -22,7 +22,9 @@ public class adminWindow extends javax.swing.JFrame {
      * Creates new form adminWindow
      */
     private Connection conn;
-    Integer option = 0;
+    private adminWindow adminForm;
+    private Integer option = 0;
+    
     public adminWindow() {
         initComponents();
         this.setResizable(false);
@@ -31,6 +33,8 @@ public class adminWindow extends javax.swing.JFrame {
         this.conn = conn;
         initComponents();
         this.setResizable(false);
+        this.adminForm = this;
+        refreshTable();
         
     }
 
@@ -244,6 +248,24 @@ public class adminWindow extends javax.swing.JFrame {
         }
     }
     
+    private void createPracownikForm(Integer maxID, Boolean isToAdd){
+        this.setEnabled(false);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormularzPracownicy(maxID,adminForm,isToAdd).setVisible(true);
+            }
+        });    
+    }
+    
+    private void createPracownikForm(Pracownicy pracownik, Boolean isToAdd){
+        this.setEnabled(false);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormularzPracownicy(pracownik,adminForm,isToAdd).setVisible(true);
+            }
+        });    
+    }
+    
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
         Integer userOption;
         userOption = JOptionPane.showConfirmDialog(this, "Na pewno chcesz się wylogować?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -306,7 +328,9 @@ public class adminWindow extends javax.swing.JFrame {
                 }
             }
             prac.setNrPracownika(maxID + 1);
-            // Wywolanie okna i add po zatwierdzeniu
+            createPracownikForm(maxID+1,true);
+            
+            
         } else if (option == 1){
             ZKM zkm = new ZKM();
             List <ZKM> zkmList = new ArrayList();
@@ -352,7 +376,8 @@ public class adminWindow extends javax.swing.JFrame {
                 return;
             }
             prac = (Pracownicy)mainTable2.getValueAt(i, -1);
-            // Wywolanie okna i update po zatwierdzeniu
+            createPracownikForm(prac,false);
+                    
         } else if (option == 1){
             ZKM zkm = new ZKM();
             int i = mainTable2.getSelectedRow();
@@ -428,40 +453,6 @@ public class adminWindow extends javax.swing.JFrame {
         refreshTable();
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(adminWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(adminWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(adminWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(adminWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new adminWindow().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
