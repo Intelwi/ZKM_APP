@@ -31,6 +31,7 @@ public class loginWindow extends javax.swing.JFrame {
     
     public loginWindow() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**
@@ -148,9 +149,7 @@ public class loginWindow extends javax.swing.JFrame {
         
         else if (login.equals(adminLogin) && pass.equals(adminPass)) {
             JOptionPane.showMessageDialog(null,"Weee, jestes adminem!!!","Success!",JOptionPane.INFORMATION_MESSAGE);
-
         }
-        
         else {
             JOptionPane.showMessageDialog(null,"Failed to connect user: " + login + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
         }

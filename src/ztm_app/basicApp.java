@@ -5,6 +5,8 @@
  */
 package ztm_app;
 import java.sql.*;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,10 +22,13 @@ public class basicApp extends javax.swing.JFrame {
     Integer option = 0;
     public basicApp() {
         initComponents();
+        this.setResizable(false);
     }
     public basicApp(Connection conn) {
         this.conn = conn;
         initComponents();
+        this.setResizable(false);
+        
     }
     public basicApp(Connection conn, Integer nr_pracownika) {
         this.conn = conn;
@@ -44,6 +49,7 @@ public class basicApp extends javax.swing.JFrame {
         } catch (SQLException exc){
             userNameLabel.setText("Something went wrong...");
         }
+        this.setResizable(false);
     }
     
     /**
@@ -59,6 +65,7 @@ public class basicApp extends javax.swing.JFrame {
         topPanel = new javax.swing.JPanel();
         loggedLabel = new javax.swing.JLabel();
         userNameLabel = new javax.swing.JLabel();
+        logOutButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
         choiceLabel = new javax.swing.JLabel();
         personalDataButton = new javax.swing.JRadioButton();
@@ -71,6 +78,7 @@ public class basicApp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Baza Komunikacji Miejskiej BetaVersion");
+        setForeground(new java.awt.Color(0, 51, 51));
 
         loggedLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         loggedLabel.setText("Zalogowany jako:");
@@ -78,26 +86,39 @@ public class basicApp extends javax.swing.JFrame {
         userNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         userNameLabel.setText("Imię i nazwisko");
 
+        logOutButton.setText("Wyloguj");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loggedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(topPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(loggedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
+                .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(loggedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                .addGap(0, 21, Short.MAX_VALUE)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         choiceLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -142,7 +163,6 @@ public class basicApp extends javax.swing.JFrame {
         mainTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tablePane.setViewportView(mainTable);
 
-        searchButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\DAWID\\Desktop\\search.jpg")); // NOI18N
         searchButton.setText("Wyszukaj");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +240,7 @@ public class basicApp extends javax.swing.JFrame {
         try{
             mainTable.setModel(new PracownicyTableModel(new Pracownicy().getRestrictedPracownik(conn, pracownikID)));
         } catch(SQLException exc){
-            JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_personalDataButtonActionPerformed
 
@@ -230,7 +250,7 @@ public class basicApp extends javax.swing.JFrame {
             mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getRestrictedWynagrodzenie(conn, pracownikID)));
         } catch(SQLException exc){
             System.err.println(exc);
-            JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_salaryButtonActionPerformed
 
@@ -248,7 +268,7 @@ public class basicApp extends javax.swing.JFrame {
                     break;
             }
         } catch(SQLException exc){
-            JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
         }        
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -257,9 +277,50 @@ public class basicApp extends javax.swing.JFrame {
         try{
             mainTable.setModel(new StanowiskaTableModel(new Stanowiska().getRestrictedStanowisko(conn, pracownikID)));
         } catch(SQLException exc){
-            JOptionPane.showMessageDialog(null,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_stanowiskoButtonActionPerformed
+
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        Integer userOption;
+        userOption = JOptionPane.showConfirmDialog(this, "Na pewno chcesz się wylogować?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (userOption == JOptionPane.YES_OPTION){
+            userOption = JOptionPane.showConfirmDialog(this, "Jestes pewien?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (userOption == JOptionPane.YES_OPTION){
+                userOption = JOptionPane.showConfirmDialog(this, "Na pewno nie zmieniłeś zdania?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (userOption == JOptionPane.YES_OPTION){
+                    userOption = JOptionPane.showConfirmDialog(this, "Ostatnia szansa, żeby się wycofać", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (userOption == JOptionPane.YES_OPTION){
+                        userOption = JOptionPane.showConfirmDialog(this, "Więcej razy nie zapytam", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        if (userOption == JOptionPane.YES_OPTION){
+                            userOption = JOptionPane.showConfirmDialog(this, "Dlaczego mi to robisz?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                            if (userOption == JOptionPane.YES_OPTION){
+                                userOption = JOptionPane.showConfirmDialog(this, "Jaz zostaniesz to dostaniesz premię, wystarczy, że klikniesz No", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                if (userOption == JOptionPane.YES_OPTION){
+                                    userOption = JOptionPane.showConfirmDialog(this, "No dobra, dostaniesz awans, kliknij No", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                    if (userOption == JOptionPane.YES_OPTION){
+                                        userOption = JOptionPane.showConfirmDialog(this, "Przycisk Yes nie działa, kliknij No, żeby się wylogować", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                        if (userOption == JOptionPane.YES_OPTION){
+                                            JOptionPane.showMessageDialog(this,"Ahh.. Niech Ci będzie... ;(","Wylogowano",JOptionPane.INFORMATION_MESSAGE);
+                                            try{
+                                                conn.close();
+                                            } catch(SQLException exc){
+
+                                            }
+                                            this.dispose();
+                                        } else if(userOption == JOptionPane.NO_OPTION){
+                                            JOptionPane.showMessageDialog(this,"Naiwniak xD","Nie ma wylogowywania się",JOptionPane.INFORMATION_MESSAGE);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            
+            }
+        }
+    }//GEN-LAST:event_logOutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,6 +362,7 @@ public class basicApp extends javax.swing.JFrame {
     private javax.swing.ButtonGroup choiceGroup;
     private javax.swing.JLabel choiceLabel;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton logOutButton;
     private javax.swing.JLabel loggedLabel;
     private javax.swing.JTable mainTable;
     private javax.swing.JRadioButton personalDataButton;
