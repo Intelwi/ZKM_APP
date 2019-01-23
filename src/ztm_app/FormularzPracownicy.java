@@ -14,10 +14,39 @@ public class FormularzPracownicy extends javax.swing.JFrame {
     /**
      * Creates new form FormularzPracownicy
      */
+    private adminWindow adminFormular; 
+    private Boolean isToAdd;
+    
     public FormularzPracownicy() {
         initComponents();
     }
 
+    public FormularzPracownicy(Integer ID, adminWindow admin, Boolean isToAdd) {
+        initComponents();
+        this.adminFormular = admin;
+        this.isToAdd = isToAdd;
+        nrPracownikaLabel.setText(ID.toString());
+    }
+    
+    public FormularzPracownicy(Pracownicy pracownik, adminWindow admin, Boolean isToAdd) {
+        initComponents();
+        this.adminFormular = admin;
+        this.isToAdd = isToAdd;
+        nrPracownikaLabel.setText(pracownik.getNrPracownika().toString());
+        imieLabel.setText(pracownik.getImie());
+        nazwiskoLabel.setText(pracownik.getNazwisko());
+        ulicaLabel.setText(pracownik.getUlica());
+        budynekLabel.setText(pracownik.getNrBudynku());
+        lokalLabel.setText(pracownik.getNrLokalu());
+        telefonLabel.setText(pracownik.getNrTelefonu());
+        urodzenieLabel.setText(pracownik.getDataUrodzenia());
+        zatrudnienieLabel.setText(pracownik.getDataZatrudnienia());
+        nrZarzadLabel.setText(pracownik.getNrZarzadu().toString());
+        nrPocztyLabel.setText(pracownik.getNrPoczty().toString());
+        nrStanowiskaLabel.setText(pracownik.getNrStanowiska().toString());
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +84,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         infoLabel = new javax.swing.JLabel();
         commitButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setText("Nr pracownika");
 
