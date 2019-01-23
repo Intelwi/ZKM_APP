@@ -148,7 +148,22 @@ public class loginWindow extends javax.swing.JFrame {
         }
         
         else if (login.equals(adminLogin) && pass.equals(adminPass)) {
-            JOptionPane.showMessageDialog(null,"Weee, jestes adminem!!!","Success!",JOptionPane.INFORMATION_MESSAGE);
+            try{
+                conn = DriverManager.getConnection(DB_URL,DB_USER,DB_PASS);
+                JOptionPane.showMessageDialog(null,"Pomyślnie zalogowano do bazy danych","Success!",JOptionPane.INFORMATION_MESSAGE);
+                
+                /* Create and display the form */
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new adminWindow(conn).setVisible(true);
+                    }
+                });
+                this.dispose();
+            }
+        
+            catch(SQLException e){
+                JOptionPane.showMessageDialog(null,"Failed to connect user: " + login + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);
+            }
         }
         else {
             JOptionPane.showMessageDialog(null,"Failed to connect user: " + login + " to " + " database with url: " + DB_URL+"\nLogin or password incorrect.","Error",JOptionPane.ERROR_MESSAGE);

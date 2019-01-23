@@ -5,6 +5,12 @@
  */
 package ztm_app;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author DAWID
@@ -14,8 +20,17 @@ public class adminWindow extends javax.swing.JFrame {
     /**
      * Creates new form adminWindow
      */
+    private Connection conn;
+    Integer option = 0;
     public adminWindow() {
         initComponents();
+        this.setResizable(false);
+    }
+    public adminWindow(Connection conn) {
+        this.conn = conn;
+        initComponents();
+        this.setResizable(false);
+        
     }
 
     /**
@@ -27,21 +42,254 @@ public class adminWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        topPanel = new javax.swing.JPanel();
+        loggedLabel = new javax.swing.JLabel();
+        userNameLabel = new javax.swing.JLabel();
+        logOutButton = new javax.swing.JButton();
+        bottomPanel3 = new javax.swing.JPanel();
+        choiceLabel3 = new javax.swing.JLabel();
+        tablePane3 = new javax.swing.JScrollPane();
+        mainTable3 = new javax.swing.JTable();
+        jComboBox = new javax.swing.JComboBox<>();
+        searchButton2 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        AddButton = new javax.swing.JButton();
+        UpdateButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        loggedLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        loggedLabel.setText("Zalogowany jako:");
+
+        userNameLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        userNameLabel.setText("Administrator");
+
+        logOutButton.setText("Wyloguj");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
+        topPanel.setLayout(topPanelLayout);
+        topPanelLayout.setHorizontalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loggedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
+                .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        topPanelLayout.setVerticalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(loggedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
+                .addGap(0, 21, Short.MAX_VALUE)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        choiceLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        choiceLabel3.setText("Wybierz informacje jakie chcesz wyszukać:");
+
+        mainTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        mainTable3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tablePane3.setViewportView(mainTable3);
+
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pracownicy", "Zarzad", "Wynagrodzenia" }));
+        jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxActionPerformed(evt);
+            }
+        });
+
+        searchButton2.setText("Wyszukaj");
+        searchButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout bottomPanel3Layout = new javax.swing.GroupLayout(bottomPanel3);
+        bottomPanel3.setLayout(bottomPanel3Layout);
+        bottomPanel3Layout.setHorizontalGroup(
+            bottomPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bottomPanel3Layout.createSequentialGroup()
+                .addGroup(bottomPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bottomPanel3Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(choiceLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanel3Layout.createSequentialGroup()
+                        .addContainerGap(24, Short.MAX_VALUE)
+                        .addComponent(tablePane3, javax.swing.GroupLayout.PREFERRED_SIZE, 864, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        bottomPanel3Layout.setVerticalGroup(
+            bottomPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bottomPanel3Layout.createSequentialGroup()
+                .addGroup(bottomPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bottomPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(choiceLabel3)
+                        .addComponent(jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bottomPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(searchButton2)))
+                .addGap(18, 18, 18)
+                .addComponent(tablePane3, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        AddButton.setText("Dodaj");
+        AddButton.setToolTipText("");
+        AddButton.setName("Dodaj"); // NOI18N
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
+
+        UpdateButton.setText("Zaktualizuj");
+        UpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButtonActionPerformed(evt);
+            }
+        });
+
+        DeleteButton.setText("Usuń");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(AddButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(UpdateButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DeleteButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSeparator1)
+                        .addComponent(bottomPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bottomPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        Integer userOption;
+        userOption = JOptionPane.showConfirmDialog(this, "Na pewno chcesz się wylogować?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (userOption == JOptionPane.YES_OPTION){
+            userOption = JOptionPane.showConfirmDialog(this, "Jestes pewien?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (userOption == JOptionPane.YES_OPTION){
+                userOption = JOptionPane.showConfirmDialog(this, "Na pewno nie zmieniłeś zdania?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (userOption == JOptionPane.YES_OPTION){
+                    userOption = JOptionPane.showConfirmDialog(this, "Ostatnia szansa, żeby się wycofać", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (userOption == JOptionPane.YES_OPTION){
+                        userOption = JOptionPane.showConfirmDialog(this, "Więcej razy nie zapytam", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                        if (userOption == JOptionPane.YES_OPTION){
+                            userOption = JOptionPane.showConfirmDialog(this, "Dlaczego mi to robisz?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                            if (userOption == JOptionPane.YES_OPTION){
+                                userOption = JOptionPane.showConfirmDialog(this, "Jaz zostaniesz to dostaniesz premię, wystarczy, że klikniesz No", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                if (userOption == JOptionPane.YES_OPTION){
+                                    userOption = JOptionPane.showConfirmDialog(this, "No dobra, dostaniesz awans, kliknij No", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                    if (userOption == JOptionPane.YES_OPTION){
+                                        userOption = JOptionPane.showConfirmDialog(this, "Przycisk Yes się zaciął, kliknij No, żeby się wylogować", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                        if (userOption == JOptionPane.YES_OPTION){
+                                            JOptionPane.showMessageDialog(this,"Ahh.. Niech Ci będzie... ;(","Wylogowano",JOptionPane.INFORMATION_MESSAGE);
+                                            try{
+                                                conn.close();
+                                            } catch(SQLException exc){
+
+                                            }
+                                            this.dispose();
+                                        } else if(userOption == JOptionPane.NO_OPTION){
+                                            JOptionPane.showMessageDialog(this,"Naiwniak xD","Nie ma wylogowywania się",JOptionPane.INFORMATION_MESSAGE);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }//GEN-LAST:event_logOutButtonActionPerformed
+
+    private void searchButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButton2ActionPerformed
+        try{
+            switch (option){
+                case 0:
+                mainTable.setModel(new PracownicyTableModel(new Pracownicy().getAll(conn)));
+                break;
+                case 1:
+                mainTable.setModel(new ZKMTableModel(new ZKM().getAll(conn)));
+                break;
+                case 2:
+                mainTable.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
+                break;
+            }
+        }
+        catch(SQLException exc){
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_searchButton2ActionPerformed
+
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddButtonActionPerformed
+
+    private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UpdateButtonActionPerformed
+
+    private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
+       // option = this.getSelectedIndex();
+    }//GEN-LAST:event_jComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +327,35 @@ public class adminWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddButton;
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JButton UpdateButton;
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JPanel bottomPanel1;
+    private javax.swing.JPanel bottomPanel3;
+    private javax.swing.JLabel choiceLabel;
+    private javax.swing.JLabel choiceLabel1;
+    private javax.swing.JLabel choiceLabel3;
+    private javax.swing.JComboBox<String> jComboBox;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton logOutButton;
+    private javax.swing.JLabel loggedLabel;
+    private javax.swing.JTable mainTable;
+    private javax.swing.JTable mainTable1;
+    private javax.swing.JTable mainTable3;
+    private javax.swing.JRadioButton personalDataButton;
+    private javax.swing.JRadioButton personalDataButton1;
+    private javax.swing.JRadioButton salaryButton;
+    private javax.swing.JRadioButton salaryButton1;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JButton searchButton1;
+    private javax.swing.JButton searchButton2;
+    private javax.swing.JRadioButton stanowiskoButton;
+    private javax.swing.JRadioButton stanowiskoButton1;
+    private javax.swing.JScrollPane tablePane;
+    private javax.swing.JScrollPane tablePane1;
+    private javax.swing.JScrollPane tablePane3;
+    private javax.swing.JPanel topPanel;
+    private javax.swing.JLabel userNameLabel;
     // End of variables declaration//GEN-END:variables
 }
