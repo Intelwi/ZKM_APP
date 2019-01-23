@@ -299,7 +299,7 @@ public class basicApp extends javax.swing.JFrame {
                                 if (userOption == JOptionPane.YES_OPTION){
                                     userOption = JOptionPane.showConfirmDialog(this, "No dobra, dostaniesz awans, kliknij No", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                                     if (userOption == JOptionPane.YES_OPTION){
-                                        userOption = JOptionPane.showConfirmDialog(this, "Przycisk Yes nie działa, kliknij No, żeby się wylogować", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                                        userOption = JOptionPane.showConfirmDialog(this, "Przycisk Yes się zaciął, kliknij No, żeby się wylogować", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                                         if (userOption == JOptionPane.YES_OPTION){
                                             JOptionPane.showMessageDialog(this,"Ahh.. Niech Ci będzie... ;(","Wylogowano",JOptionPane.INFORMATION_MESSAGE);
                                             try{
