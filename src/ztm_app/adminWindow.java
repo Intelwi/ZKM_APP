@@ -266,6 +266,24 @@ public class adminWindow extends javax.swing.JFrame {
         });    
     }
     
+    private void createWynagrodzenieForm(Integer maxID, Boolean isToAdd){
+        this.setEnabled(false);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormularzWynagrodzenia(maxID,adminForm,isToAdd).setVisible(true);
+            }
+        });    
+    }
+    
+    private void createWynagrodzenieForm(Wynagrodzenia wynagrodzenie, Boolean isToAdd){
+        this.setEnabled(false);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormularzWynagrodzenia(wynagrodzenie,adminForm,isToAdd).setVisible(true);
+            }
+        });    
+    }
+    
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
         Integer userOption;
         userOption = JOptionPane.showConfirmDialog(this, "Na pewno chcesz się wylogować?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -362,7 +380,7 @@ public class adminWindow extends javax.swing.JFrame {
                 }
             }
             wyn.setNrPracownika(maxID + 1);
-            // Wywolanie okna i add po zatwierdzeniu
+            createWynagrodzenieForm(maxID+1,true);
         }
         refreshTable();
     }//GEN-LAST:event_AddButtonActionPerformed
@@ -395,7 +413,7 @@ public class adminWindow extends javax.swing.JFrame {
                 return;
             }
             wyn = (Wynagrodzenia)mainTable2.getValueAt(i, -1);
-            // Wywolanie okna i update po zatwierdzeniu
+            createWynagrodzenieForm(wyn,false);
         }
         refreshTable();
     }//GEN-LAST:event_UpdateButtonActionPerformed

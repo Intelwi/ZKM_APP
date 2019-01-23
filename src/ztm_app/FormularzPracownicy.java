@@ -284,6 +284,14 @@ public class FormularzPracownicy extends javax.swing.JFrame {
 
     private void commitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitButtonActionPerformed
         Pracownicy prac = new Pracownicy();
+        
+        if (budynekLabel.getText().trim().isEmpty() || imieLabel.getText().trim().isEmpty() || nazwiskoLabel.getText().trim().isEmpty() || nrPocztyLabel.getText().trim().isEmpty() || nrStanowiskaLabel.getText().trim().isEmpty() || nrZarzadLabel.getText().trim().isEmpty() || telefonLabel.getText().trim().isEmpty() || zatrudnienieLabel.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
+        }
+        if (ulicaLabel.getText().trim().isEmpty()) prac.setUlica("NULL");
+        if (lokalLabel.getText().trim().isEmpty()) prac.setNrLokalu("NULL");
+        if (urodzenieLabel.getText().trim().isEmpty()) prac.setDataUrodzenia("NULL");
+        
         prac.setNrBudynku(budynekLabel.getText().trim());
         prac.setImie(imieLabel.getText().trim());
         prac.setNazwisko(nazwiskoLabel.getText().trim());
@@ -296,12 +304,8 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         prac.setUlica(ulicaLabel.getText().trim());
         prac.setDataUrodzenia(urodzenieLabel.getText().trim());
         prac.setDataZatrudnienia(zatrudnienieLabel.getText().trim());
-        if (prac.getNrBudynku().length() == 0 || prac.getImie().length() == 0 || prac.getNazwisko().length() == 0 || prac.getNrPoczty() <= 0 || prac.getNrStanowiska() <= 0 || prac.getNrZarzadu() <= 0 || prac.getNrTelefonu().length() == 0 || prac.getDataZatrudnienia().length() == 0){
-            JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
-        }
-        if (prac.getUlica().length() == 0) prac.setUlica("NULL");
-        if (prac.getNrLokalu().length() == 0) prac.setNrLokalu("NULL");
-        if (prac.getDataUrodzenia().length() == 0) prac.setDataUrodzenia("NULL");
+        
+        
     }//GEN-LAST:event_commitButtonActionPerformed
 
     
