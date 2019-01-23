@@ -31,6 +31,7 @@ public class loginWindow extends javax.swing.JFrame {
     
     public loginWindow() {
         initComponents();
+        this.setResizable(false);
     }
 
     /**
