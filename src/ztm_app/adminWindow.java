@@ -48,7 +48,7 @@ public class adminWindow extends javax.swing.JFrame {
         logOutButton = new javax.swing.JButton();
         bottomPanel2 = new javax.swing.JPanel();
         choiceLabel2 = new javax.swing.JLabel();
-        tablePane3 = new javax.swing.JScrollPane();
+        tablePane2 = new javax.swing.JScrollPane();
         mainTable2 = new javax.swing.JTable();
         jComboBox = new javax.swing.JComboBox<>();
         searchButton2 = new javax.swing.JButton();
@@ -115,7 +115,7 @@ public class adminWindow extends javax.swing.JFrame {
             }
         ));
         mainTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tablePane3.setViewportView(mainTable2);
+        tablePane2.setViewportView(mainTable2);
 
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pracownicy", "Zarzad", "Wynagrodzenia" }));
         jComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +146,7 @@ public class adminWindow extends javax.swing.JFrame {
                         .addComponent(searchButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bottomPanel2Layout.createSequentialGroup()
                         .addContainerGap(24, Short.MAX_VALUE)
-                        .addComponent(tablePane3, javax.swing.GroupLayout.PREFERRED_SIZE, 864, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tablePane2, javax.swing.GroupLayout.PREFERRED_SIZE, 864, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         bottomPanel2Layout.setVerticalGroup(
@@ -160,7 +160,7 @@ public class adminWindow extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(searchButton2)))
                 .addGap(18, 18, 18)
-                .addComponent(tablePane3, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(tablePane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -330,31 +330,15 @@ public class adminWindow extends javax.swing.JFrame {
     private javax.swing.JButton AddButton;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton UpdateButton;
-    private javax.swing.JPanel bottomPanel;
-    private javax.swing.JPanel bottomPanel1;
     private javax.swing.JPanel bottomPanel2;
-    private javax.swing.JLabel choiceLabel;
-    private javax.swing.JLabel choiceLabel1;
     private javax.swing.JLabel choiceLabel2;
     private javax.swing.JComboBox<String> jComboBox;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton logOutButton;
     private javax.swing.JLabel loggedLabel;
-    private javax.swing.JTable mainTable;
-    private javax.swing.JTable mainTable1;
     private javax.swing.JTable mainTable2;
-    private javax.swing.JRadioButton personalDataButton;
-    private javax.swing.JRadioButton personalDataButton1;
-    private javax.swing.JRadioButton salaryButton;
-    private javax.swing.JRadioButton salaryButton1;
-    private javax.swing.JButton searchButton;
-    private javax.swing.JButton searchButton1;
     private javax.swing.JButton searchButton2;
-    private javax.swing.JRadioButton stanowiskoButton;
-    private javax.swing.JRadioButton stanowiskoButton1;
-    private javax.swing.JScrollPane tablePane;
-    private javax.swing.JScrollPane tablePane1;
-    private javax.swing.JScrollPane tablePane3;
+    private javax.swing.JScrollPane tablePane2;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel userNameLabel;
     // End of variables declaration//GEN-END:variables

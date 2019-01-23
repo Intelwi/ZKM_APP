@@ -143,7 +143,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="24" max="32767" attributes="0"/>
-                          <Component id="tablePane3" min="-2" pref="864" max="-2" attributes="0"/>
+                          <Component id="tablePane2" min="-2" pref="864" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -164,7 +164,7 @@
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="tablePane3" pref="284" max="32767" attributes="0"/>
+                  <Component id="tablePane2" pref="284" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -179,7 +179,7 @@
             <Property name="text" type="java.lang.String" value="Wybierz informacje jakie chcesz wyszuka&#x107;:"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="tablePane3">
+        <Container class="javax.swing.JScrollPane" name="tablePane2">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
