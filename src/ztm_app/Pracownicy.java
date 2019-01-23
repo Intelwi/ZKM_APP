@@ -208,16 +208,17 @@ public class Pracownicy {
             stmt.setString(1, prac.Imie);
             stmt.setString(2, prac.Nazwisko);
             stmt.setString(3, prac.Miejscowosc);
-            stmt.setString(4, prac.Miejscowosc);
-            stmt.setString(5, prac.Ulica);
-            stmt.setString(6, prac.NrBudynku);
-            stmt.setString(7, prac.NrLokalu);
-            stmt.setString(8, prac.NrTelefonu);
-            stmt.setString(9, prac.DataUrodzenia);
-            stmt.setString(10, prac.DataZatrudnienia);
-            stmt.setInt(11, prac.NrZarzadu);
-            stmt.setInt(12, prac.NrPoczty);
+            stmt.setString(4, prac.Ulica);
+            stmt.setString(5, prac.NrBudynku);
+            stmt.setString(6, prac.NrLokalu);
+            stmt.setString(7, prac.NrTelefonu);
+            stmt.setString(8, prac.DataUrodzenia);
+            stmt.setString(9, prac.DataZatrudnienia);
+            stmt.setInt(10, prac.NrZarzadu);
+            stmt.setInt(11, prac.NrPoczty);
+            stmt.setInt(12, prac.NrStanowiska);
             stmt.setInt(13, prac.NrPracownika);
+            
             result = stmt.executeUpdate();
         } catch (SQLException exc){
             result = 0;
@@ -233,6 +234,34 @@ public class Pracownicy {
         try{
             stmt = conn.prepareStatement(statement);
             stmt.setInt(1, ID);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
+    
+    int addPracownik(Connection conn, Pracownicy prac) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "INSERT INTO Pracownicy VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setInt(1, prac.NrPracownika);
+            stmt.setString(2, prac.Imie);
+            stmt.setString(3, prac.Nazwisko);
+            stmt.setString(4, prac.Miejscowosc);
+            stmt.setString(5, prac.Ulica);
+            stmt.setString(6, prac.NrBudynku);
+            stmt.setString(7, prac.NrLokalu);
+            stmt.setString(8, prac.NrTelefonu);
+            stmt.setString(9, prac.DataUrodzenia);
+            stmt.setString(10, prac.DataZatrudnienia);
+            stmt.setInt(11, prac.NrZarzadu);
+            stmt.setInt(12, prac.NrPoczty);
+            stmt.setInt(13, prac.NrStanowiska);
+
             result = stmt.executeUpdate();
         } catch (SQLException exc){
             result = 0;

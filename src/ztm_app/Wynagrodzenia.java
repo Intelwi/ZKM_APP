@@ -145,4 +145,24 @@ public class Wynagrodzenia {
         }
         return result;
     }
+    
+    int addWynagrodzenie(Connection conn, Wynagrodzenia wyn) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "INSERT INTO Wynagrodzenia VALUES (?,?,?,?,?)";
+        try{
+            stmt = conn.prepareStatement(statement);
+            
+            stmt.setInt(1, wyn.NrWynagrodzenia);
+            stmt.setFloat(2, wyn.KwotaPodstawowa);
+            stmt.setFloat(3, wyn.Premia);
+            stmt.setString(4, wyn.DataWynagrodzenia);
+            stmt.setInt(5, wyn.NrPracownika);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
 }

@@ -124,5 +124,27 @@ public class ZKM {
         }
         return result;
     }
+    
+     int addZarzad(Connection conn, ZKM zkm) throws SQLException {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "INSERT INTO Zarzad_komunikacji_miejskiej VALUES (?,?,?,?,?,?,?)";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setInt(1, zkm.NrZarzadu);
+            stmt.setString(2, zkm.NazwaZarzadu);
+            stmt.setString(3, zkm.Ulica);
+            stmt.setString(4, zkm.NrBudynku);
+            stmt.setString(5, zkm.NrTelefonu);
+            stmt.setString(6, zkm.Email);
+            stmt.setInt(7, zkm.NrPoczty);
+   
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
    
 }
