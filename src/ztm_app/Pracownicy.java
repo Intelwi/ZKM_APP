@@ -241,7 +241,7 @@ public class Pracownicy {
         return result;
     }
     
-    int addPracownik(Connection conn, Pracownicy prac) throws SQLException {
+    int addPracownik(Connection conn, Pracownicy prac){
         PreparedStatement stmt = null;
         int result;
         

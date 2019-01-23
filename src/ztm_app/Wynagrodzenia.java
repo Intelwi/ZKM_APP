@@ -146,7 +146,7 @@ public class Wynagrodzenia {
         return result;
     }
     
-    int addWynagrodzenie(Connection conn, Wynagrodzenia wyn) throws SQLException {
+    int addWynagrodzenie(Connection conn, Wynagrodzenia wyn) {
         PreparedStatement stmt = null;
         int result;
         

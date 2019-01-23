@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -288,7 +290,57 @@ public class adminWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButton2ActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        
+        if (option == 0){
+            Pracownicy prac = new Pracownicy();
+            List <Pracownicy> pracownicyList = new ArrayList();
+            int maxID = 0;
+            try{
+                pracownicyList = prac.getAll(conn);
+            } catch (SQLException exc){
+                JOptionPane.showMessageDialog(this,"Wystąpił nieoczekiwany błąd połączenia","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            for (int i = 0; i < pracownicyList.size() - 1; ++i){
+                if (pracownicyList.get(i).getNrPracownika() > maxID){
+                    maxID = pracownicyList.get(i).getNrPracownika();
+                }
+            }
+            prac.setNrPracownika(maxID + 1);
+            // Wywolanie okna i add po zatwierdzeniu
+        } else if (option == 1){
+            ZKM zkm = new ZKM();
+            List <ZKM> zkmList = new ArrayList();
+            try{
+                zkmList = zkm.getAll(conn);
+            } catch (SQLException exc){
+                JOptionPane.showMessageDialog(this,"Wystąpił nieoczekiwany błąd połączenia","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (zkmList.size() != 0){
+                JOptionPane.showMessageDialog(this,"Nie można dodać więcej niż jednego zarządu","Błąd",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            zkm.setNrZarzadu(1);
+            // Wywolanie okna i add po zatwierdzeniu
+        } else if (option == 2){
+            Wynagrodzenia wyn = new Wynagrodzenia();
+            List <Wynagrodzenia> wynagrodzeniaList = new ArrayList();
+            int maxID = 0;
+            try{
+                wynagrodzeniaList = wyn.getAll(conn);
+            } catch (SQLException exc){
+                JOptionPane.showMessageDialog(this,"Wystąpił nieoczekiwany błąd połączenia","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            for (int i = 0; i < wynagrodzeniaList.size() - 1; ++i){
+                if (wynagrodzeniaList.get(i).getNrWynagrodzenia()> maxID){
+                    maxID = wynagrodzeniaList.get(i).getNrWynagrodzenia();
+                }
+            }
+            wyn.setNrPracownika(maxID + 1);
+            // Wywolanie okna i add po zatwierdzeniu
+        }
+        refreshTable();
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
@@ -320,6 +372,7 @@ public class adminWindow extends javax.swing.JFrame {
             wyn = (Wynagrodzenia)mainTable2.getValueAt(i, -1);
             // Wywolanie okna i update po zatwierdzeniu
         }
+        refreshTable();
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
@@ -332,9 +385,14 @@ public class adminWindow extends javax.swing.JFrame {
         if (option == 0){
             Pracownicy prac = new Pracownicy();
             int i = mainTable2.getSelectedRow();
+            int userOption;
             Integer ID;
             if (i < 0){
                 JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            userOption = JOptionPane.showConfirmDialog(this, "Czy na pewno chcesz usunąć wybrany rekord?", "Potwierdzenie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (userOption == JOptionPane.NO_OPTION){
                 return;
             }
             ID = (Integer)mainTable2.getValueAt(i, 0);
@@ -349,9 +407,14 @@ public class adminWindow extends javax.swing.JFrame {
         } else if (option == 2){
             Wynagrodzenia wyn = new Wynagrodzenia();
             int i = mainTable2.getSelectedRow();
+            int userOption;
             Integer ID;
             if (i < 0){
                 JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            userOption = JOptionPane.showConfirmDialog(this, "Czy na pewno chcesz usunąć wybrany rekord?", "Potwierdzenie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (userOption == JOptionPane.NO_OPTION){
                 return;
             }
             ID = (Integer)mainTable2.getValueAt(i, 0);
@@ -362,6 +425,7 @@ public class adminWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Nie udało się usunąć rekordu, sprawdź połączenie z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
             }
         }
+        refreshTable();
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     /**
