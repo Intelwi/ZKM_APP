@@ -240,6 +240,7 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
         }
         
         if (premiaLabel.getText().trim().isEmpty()) wyn.setPremia(new Float(0));
+        else wyn.setPremia(Float.parseFloat(premiaLabel.getText().trim()));
         
         if (Float.parseFloat(premiaLabel.getText().trim()) < 0 || Float.parseFloat(kwotaPodstawowaLabel.getText().trim()) < 0) {
             JOptionPane.showMessageDialog(this,"Kwota nie może być ujemna","Błąd",JOptionPane.INFORMATION_MESSAGE);
@@ -248,7 +249,6 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
         
         wyn.setNrWynagrodzenia(Integer.parseInt(nrWynagrodzeniaLabel.getText().trim()));
         wyn.setKwotaPodstawowa(Float.parseFloat(kwotaPodstawowaLabel.getText().trim()));
-        wyn.setPremia(Float.parseFloat(premiaLabel.getText().trim()));
         wyn.setDataWynagrodzenia(dataWynagrodzeniaLabel.getText().trim());
         wyn.setNrPracownika(Integer.parseInt(nrPracownikaLabel.getText().trim()));
         
