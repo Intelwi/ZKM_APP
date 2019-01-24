@@ -109,4 +109,35 @@ public class Poczty {
         }
         return result;
     }
+    
+    public List<Poczty> getPocztyBy(Connection conn, String atrybut, String reqValue) throws SQLException {
+        List <Poczty> pocztyList = new ArrayList();
+        PreparedStatement stmt = null;
+        ResultSet rs =null;
+ 
+        String statement;
+        if (atrybut.equalsIgnoreCase("Nr_poczty"))
+            statement = "SELECT * FROM POCZTY WHERE nr_poczty = ?";
+        else if (atrybut.equalsIgnoreCase("Kod_pocztowy"))
+            statement = "SELECT * FROM POCZTY WHERE kod_pocztowy = ?";
+        else
+            statement = "SELECT * FROM POCZTY WHERE poczta = ?";
+        
+        System.out.println(statement);
+        
+        stmt = conn.prepareStatement(statement);
+        stmt.setString(1, reqValue);
+        rs = stmt.executeQuery(statement);
+        
+        while(rs.next()){
+                Poczty poczta = new Poczty();
+                poczta.setNrPoczty(rs.getInt(1));            
+                poczta.setKodPocztowy(rs.getString(2));            
+                poczta.setPoczta(rs.getString(3));
+                
+                pocztyList.add(poczta);
+            }
+        
+        return pocztyList;
+    }
 }

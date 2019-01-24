@@ -11,6 +11,8 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.event.ListDataListener;
 
 /**
  *
@@ -24,6 +26,7 @@ public class adminWindow extends javax.swing.JFrame {
     private Connection conn;
     private adminWindow adminForm;
     private Integer option = 0;
+    private Integer optionToSearchBy = 0;
     
     public adminWindow() {
         initComponents();
@@ -62,6 +65,10 @@ public class adminWindow extends javax.swing.JFrame {
         AddButton = new javax.swing.JButton();
         UpdateButton = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
+        searchByLabel = new javax.swing.JLabel();
+        searchByComboBox = new javax.swing.JComboBox<>();
+        searchByButton = new javax.swing.JButton();
+        searchByTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,7 +139,7 @@ public class adminWindow extends javax.swing.JFrame {
             }
         });
 
-        searchButton2.setText("Wyszukaj");
+        searchButton2.setText("Odśwież");
         searchButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButton2ActionPerformed(evt);
@@ -195,22 +202,49 @@ public class adminWindow extends javax.swing.JFrame {
             }
         });
 
+        searchByLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        searchByLabel.setText("Wyszukaj za pomocą:");
+
+        searchByComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nr_Pracownika", "Imię", "Nazwisko" }));
+        searchByComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByComboBoxActionPerformed(evt);
+            }
+        });
+
+        searchByButton.setText("Wyszukaj");
+        searchByButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(searchByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchByTextField)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchByButton)
+                        .addGap(60, 60, 60)
                         .addComponent(AddButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(UpdateButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DeleteButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator1)
-                        .addComponent(bottomPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bottomPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
@@ -221,12 +255,16 @@ public class adminWindow extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bottomPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByLabel)
+                    .addComponent(searchByTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         pack();
@@ -445,6 +483,24 @@ public class adminWindow extends javax.swing.JFrame {
     private void jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxActionPerformed
        
         option = ((JComboBox)evt.getSource()).getSelectedIndex();
+        switch (option){
+            case 0:
+                searchByComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nr_Pracownika", "Imię", "Nazwisko" }));
+                break;
+            case 1:
+                searchByComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nr_poczty", "Kod_pocztowy", "Poczta" }));
+                break;
+            case 2:
+                searchByComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nr_wynagrodzenia", "Data_wynagrodzenia", "Nr_pracownika" }));
+                break;
+        }   
+        searchByComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByComboBoxActionPerformed(evt);
+            }
+        });
+        
+        
         refreshTable();
     }//GEN-LAST:event_jComboBoxActionPerformed
 
@@ -513,6 +569,38 @@ public class adminWindow extends javax.swing.JFrame {
         refreshTable();
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
+    private void searchByComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByComboBoxActionPerformed
+        
+    }//GEN-LAST:event_searchByComboBoxActionPerformed
+
+    private void searchByButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByButtonActionPerformed
+        String atrybut;
+        String reqValue;
+        if (searchByTextField.getText().trim().isEmpty()){
+            return;
+        }
+        optionToSearchBy = searchByComboBox.getSelectedIndex();
+        atrybut = searchByComboBox.getItemAt(optionToSearchBy);
+        reqValue = searchByTextField.getText().trim();
+        System.out.println(atrybut + ", " + reqValue);
+        try{
+            switch (option){
+                case 0:
+                mainTable2.setModel(new PracownicyTableModel(new Pracownicy().getPracownikBy(conn, atrybut, reqValue)));
+                break;
+                case 1:
+                mainTable2.setModel(new PocztyTableModel(new Poczty().getPocztyBy(conn, atrybut, reqValue)));
+                break;
+                case 2:
+                mainTable2.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getWynagrodzeniaBy(conn, atrybut, reqValue)));
+                break;
+            }
+        }
+        catch(SQLException exc){
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_searchByButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddButton;
@@ -526,6 +614,10 @@ public class adminWindow extends javax.swing.JFrame {
     private javax.swing.JLabel loggedLabel;
     private javax.swing.JTable mainTable2;
     private javax.swing.JButton searchButton2;
+    private javax.swing.JButton searchByButton;
+    private javax.swing.JComboBox<String> searchByComboBox;
+    private javax.swing.JLabel searchByLabel;
+    private javax.swing.JTextField searchByTextField;
     private javax.swing.JScrollPane tablePane2;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel userNameLabel;

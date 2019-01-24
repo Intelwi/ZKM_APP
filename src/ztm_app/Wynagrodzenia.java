@@ -165,4 +165,35 @@ public class Wynagrodzenia {
         }
         return result;
     }
+    
+    public List<Wynagrodzenia> getWynagrodzeniaBy(Connection conn, String atrybut, String reqValue) throws SQLException {
+        List <Wynagrodzenia> wynagrodzeniaList = new ArrayList();
+        PreparedStatement stmt = null;
+        ResultSet rs =null;
+        
+        String statement;
+        if (atrybut.equalsIgnoreCase("Nr_wynagrodzenia"))
+            statement = "SELECT * FROM WYNAGRODZENIA WHERE Nr_wynagrodzenia = ?";
+        else if (atrybut.equalsIgnoreCase("Data_wynagrodzenia"))
+            statement = "SELECT * FROM WYNAGRODZENIA WHERE Data_wynagrodzenia = ?";
+        else
+            statement = "SELECT * FROM WYNAGRODZENIA WHERE Nr_pracownika = ?";
+        
+        stmt = conn.prepareStatement(statement);
+        stmt.setString(1, reqValue);
+        rs = stmt.executeQuery(statement);
+        
+        while(rs.next()){
+                Wynagrodzenia wynagrodzenie = new Wynagrodzenia();
+                wynagrodzenie.setNrWynagrodzenia(rs.getInt(1));            
+                wynagrodzenie.setKwotaPodstawowa(rs.getFloat(2));            
+                wynagrodzenie.setPremia(rs.getFloat(3));
+                wynagrodzenie.setDataWynagrodzenia(rs.getString(4).substring(0, 10));
+                wynagrodzenie.setNrPracownika(rs.getInt(5));
+                
+                wynagrodzeniaList.add(wynagrodzenie);
+            }
+        
+        return wynagrodzeniaList;
+    }
 }
