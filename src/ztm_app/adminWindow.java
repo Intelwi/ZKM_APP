@@ -287,6 +287,24 @@ public class adminWindow extends javax.swing.JFrame {
         });    
     }
     
+    private void createPocztyForm(Integer maxID, Boolean isToAdd){
+        //this.setEnabled(false);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormularzPoczty(maxID,adminForm,isToAdd).setVisible(true);
+            }
+        });    
+    }
+    
+    private void createPocztyForm(Poczty poczta, Boolean isToAdd){
+        //this.setEnabled(false);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormularzPoczty(poczta,adminForm,isToAdd).setVisible(true);
+            }
+        });    
+    }
+    
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
         Integer userOption;
         userOption = JOptionPane.showConfirmDialog(this, "Na pewno chcesz się wylogować?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
