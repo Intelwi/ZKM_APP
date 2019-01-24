@@ -34,6 +34,7 @@ public class FormularzPoczty extends javax.swing.JFrame {
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrPocztyLabel.setText(ID.toString());
+        nrPocztyLabel.setEnabled(true);
     }
     
     public FormularzPoczty(Connection conn, Poczty poczta, adminWindow admin, Boolean isToAdd) {
@@ -195,14 +196,21 @@ public class FormularzPoczty extends javax.swing.JFrame {
     private void commitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitButtonActionPerformed
         Poczty poczta = new Poczty();
 
-        if (nrPocztyLabel.getText().trim().isEmpty() || kodPocztowyLabel.getText().trim().isEmpty() || pocztaLabel.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
+        try{
+            if (nrPocztyLabel.getText().trim().isEmpty() || kodPocztowyLabel.getText().trim().isEmpty() || pocztaLabel.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+        
+            poczta.setNrPoczty(Integer.parseInt(nrPocztyLabel.getText().trim()));
+            poczta.setKodPocztowy(kodPocztowyLabel.getText().trim());
+            poczta.setPoczta(pocztaLabel.getText().trim());
+        }
+        
+        catch(NumberFormatException exc){
+            JOptionPane.showMessageDialog(this,"Wprowadzono niepoprawne dane","Błąd",JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        poczta.setNrPoczty(Integer.parseInt(nrPocztyLabel.getText().trim()));
-        poczta.setKodPocztowy(kodPocztowyLabel.getText().trim());
-        poczta.setPoczta(pocztaLabel.getText().trim());
         
         if (isToAdd){
             if (poczta.addPoczta(conn, poczta) != 0){

@@ -30,6 +30,7 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrWynagrodzeniaLabel.setText(ID.toString());
+        nrWynagrodzeniaLabel.setEnabled(true);
     }
     
     public FormularzWynagrodzenia(Connection conn, Wynagrodzenia wyn, adminWindow admin, Boolean isToAdd) {
