@@ -168,7 +168,7 @@ public class Pracownicy {
         return pracownicyList;
     }
     
-    public List<Pracownicy> getRestrictedPracownik(Connection conn, Integer ID) throws SQLException {
+    public List<Pracownicy> getRestrictedPracownik(Connection conn, Integer ID) throws SQLException, NullPointerException {
         List<Pracownicy> pracownicyList = new ArrayList();
         Pracownicy pracownik = new Pracownicy();
         PreparedStatement stmt = null;

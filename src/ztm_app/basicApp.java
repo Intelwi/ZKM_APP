@@ -49,7 +49,12 @@ public class basicApp extends javax.swing.JFrame {
             }
             mainTable.setModel(new PracownicyTableModel(new Pracownicy().getRestrictedPracownik(conn, pracownikID)));
         } catch (SQLException exc){
-            userNameLabel.setText("Something went wrong...");
+            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+        } catch (NullPointerException exc){
+            JOptionPane.showMessageDialog(this,"Nie znaleziono danych","Error",JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+            this.dispose();
         }
         this.setResizable(false);
         setLocation(300, 200);
