@@ -385,13 +385,21 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         if (urodzenieLabel.getText().trim().isEmpty()) prac.setDataUrodzenia("NULL");
         else prac.setDataUrodzenia(urodzenieLabel.getText().trim());
         
+        try{
+            prac.setNrPoczty(Integer.parseInt(nrPocztyLabel.getText().trim()));
+            prac.setNrPracownika(Integer.parseInt(nrPracownikaLabel.getText().trim()));
+            prac.setNrStanowiska(Integer.parseInt(nrStanowiskaLabel.getText().trim()));
+            prac.setNrZarzadu(Integer.parseInt(nrZarzadLabel.getText().trim()));
+        }
+        
+        catch(NumberFormatException exc){
+            JOptionPane.showMessageDialog(this,"Wprowadzono niepoprawne dane","Błąd",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         prac.setNrBudynku(budynekLabel.getText().trim());
         prac.setImie(imieLabel.getText().trim());
         prac.setNazwisko(nazwiskoLabel.getText().trim());
-        prac.setNrPoczty(Integer.parseInt(nrPocztyLabel.getText().trim()));
-        prac.setNrPracownika(Integer.parseInt(nrPracownikaLabel.getText().trim()));
-        prac.setNrStanowiska(Integer.parseInt(nrStanowiskaLabel.getText().trim()));
-        prac.setNrZarzadu(Integer.parseInt(nrZarzadLabel.getText().trim()));
         prac.setNrTelefonu(telefonLabel.getText().trim());
         prac.setDataZatrudnienia(zatrudnienieLabel.getText().trim());
         prac.setMiejscowosc(miejscowoscLabel.getText().trim());
