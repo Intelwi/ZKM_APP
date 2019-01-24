@@ -582,18 +582,17 @@ public class adminWindow extends javax.swing.JFrame {
         optionToSearchBy = searchByComboBox.getSelectedIndex();
         atrybut = searchByComboBox.getItemAt(optionToSearchBy);
         reqValue = searchByTextField.getText().trim();
-        System.out.println(atrybut + ", " + reqValue);
         try{
             switch (option){
                 case 0:
-                mainTable2.setModel(new PracownicyTableModel(new Pracownicy().getPracownikBy(conn, atrybut, reqValue)));
-                break;
+                    mainTable2.setModel(new PracownicyTableModel(new Pracownicy().getPracownikBy(conn, atrybut, reqValue)));
+                    break;
                 case 1:
-                mainTable2.setModel(new PocztyTableModel(new Poczty().getPocztyBy(conn, atrybut, reqValue)));
-                break;
+                    mainTable2.setModel(new PocztyTableModel(new Poczty().getPocztyBy(conn, atrybut, reqValue)));
+                    break;
                 case 2:
-                mainTable2.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getWynagrodzeniaBy(conn, atrybut, reqValue)));
-                break;
+                    mainTable2.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getWynagrodzeniaBy(conn, atrybut, reqValue)));
+                    break;
             }
         }
         catch(SQLException exc){

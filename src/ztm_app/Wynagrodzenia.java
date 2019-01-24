@@ -181,7 +181,7 @@ public class Wynagrodzenia {
         
         stmt = conn.prepareStatement(statement);
         stmt.setString(1, reqValue);
-        rs = stmt.executeQuery(statement);
+        rs = stmt.executeQuery();
         
         while(rs.next()){
                 Wynagrodzenia wynagrodzenie = new Wynagrodzenia();

@@ -123,20 +123,20 @@ public class Poczty {
         else
             statement = "SELECT * FROM POCZTY WHERE poczta = ?";
         
-        System.out.println(statement);
+        System.out.println(reqValue);
         
         stmt = conn.prepareStatement(statement);
         stmt.setString(1, reqValue);
-        rs = stmt.executeQuery(statement);
+        rs = stmt.executeQuery();
         
         while(rs.next()){
-                Poczty poczta = new Poczty();
-                poczta.setNrPoczty(rs.getInt(1));            
-                poczta.setKodPocztowy(rs.getString(2));            
-                poczta.setPoczta(rs.getString(3));
-                
-                pocztyList.add(poczta);
-            }
+            Poczty poczta = new Poczty();
+            poczta.setNrPoczty(rs.getInt(1));            
+            poczta.setKodPocztowy(rs.getString(2));            
+            poczta.setPoczta(rs.getString(3));
+
+            pocztyList.add(poczta);
+        }
         
         return pocztyList;
     }

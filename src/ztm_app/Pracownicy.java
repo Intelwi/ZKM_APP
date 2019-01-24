@@ -271,7 +271,6 @@ public class Pracownicy {
     
     public List<Pracownicy> getPracownikBy(Connection conn, String atrybut, String reqValue) throws SQLException, NullPointerException {
         List<Pracownicy> pracownicyList = new ArrayList();
-        Pracownicy pracownik = new Pracownicy();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         String statement;
@@ -287,6 +286,7 @@ public class Pracownicy {
         rs = stmt.executeQuery();
         
         while(rs.next()){
+            Pracownicy pracownik = new Pracownicy();
             pracownik.setNrPracownika(rs.getInt(1));            
             pracownik.setImie(rs.getString(2));            
             pracownik.setNazwisko(rs.getString(3));
@@ -300,6 +300,7 @@ public class Pracownicy {
             pracownik.setNrZarzadu(rs.getInt(11));
             pracownik.setNrPoczty(rs.getInt(12));
             pracownik.setNrStanowiska(rs.getInt(13));
+            
             pracownicyList.add(pracownik);
         }
         return pracownicyList;
