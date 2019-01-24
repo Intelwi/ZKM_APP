@@ -72,7 +72,7 @@ public class Wynagrodzenia {
         ResultSet rs =null;
         
         stmt = conn.createStatement();
-        String statement = "SELECT * FROM WYNAGRODZENIA";
+        String statement = "SELECT * FROM WYNAGRODZENIA ORDER BY NR_WYNAGRODZENIA";
         rs = stmt.executeQuery(statement);
         
         while(rs.next()){
@@ -91,24 +91,24 @@ public class Wynagrodzenia {
     
     public List<Wynagrodzenia> getRestrictedWynagrodzenie(Connection conn, Integer ID) throws SQLException {
         List<Wynagrodzenia> wynagrodzeniaList = new ArrayList();
-        Wynagrodzenia wynagrodzenie = new Wynagrodzenia();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
-        String statement = "SELECT * FROM WYNAGRODZENIA WHERE NR_PRACOWNIKA = ?";
+        String statement = "SELECT * FROM WYNAGRODZENIA WHERE NR_PRACOWNIKA = ? ORDER BY NR_WYNAGRODZENIA";
         stmt = conn.prepareStatement(statement);
         stmt.setInt(1, ID);
         rs = stmt.executeQuery();
-        rs.next();
-                    
-        wynagrodzenie.setNrWynagrodzenia(rs.getInt(1));            
-        wynagrodzenie.setKwotaPodstawowa(rs.getFloat(2));            
-        wynagrodzenie.setPremia(rs.getFloat(3));
-        wynagrodzenie.setDataWynagrodzenia(rs.getString(4));
-        wynagrodzenie.setNrPracownika(rs.getInt(5));
-                
-        wynagrodzeniaList.add(wynagrodzenie);
         
+        while(rs.next()) {              
+            Wynagrodzenia wynagrodzenie = new Wynagrodzenia();
+            wynagrodzenie.setNrWynagrodzenia(rs.getInt(1));            
+            wynagrodzenie.setKwotaPodstawowa(rs.getFloat(2));            
+            wynagrodzenie.setPremia(rs.getFloat(3));
+            wynagrodzenie.setDataWynagrodzenia(rs.getString(4));
+            wynagrodzenie.setNrPracownika(rs.getInt(5));
+                
+            wynagrodzeniaList.add(wynagrodzenie);
+        }
         return wynagrodzeniaList;
     }
     
@@ -175,9 +175,9 @@ public class Wynagrodzenia {
         if (atrybut.equalsIgnoreCase("Nr_wynagrodzenia"))
             statement = "SELECT * FROM WYNAGRODZENIA WHERE Nr_wynagrodzenia = ?";
         else if (atrybut.equalsIgnoreCase("Data_wynagrodzenia"))
-            statement = "SELECT * FROM WYNAGRODZENIA WHERE Data_wynagrodzenia = ?";
+            statement = "SELECT * FROM WYNAGRODZENIA WHERE Data_wynagrodzenia = ? ORDER BY NR_WYNAGRODZENIA";
         else
-            statement = "SELECT * FROM WYNAGRODZENIA WHERE Nr_pracownika = ?";
+            statement = "SELECT * FROM WYNAGRODZENIA WHERE Nr_pracownika = ? ORDER BY NR_WYNAGRODZENIA";
         
         stmt = conn.prepareStatement(statement);
         stmt.setString(1, reqValue);

@@ -46,7 +46,7 @@ public class Poczty {
         ResultSet rs =null;
         
         stmt = conn.createStatement();
-        String statement = "SELECT Nr_poczty, Kod_pocztowy, Poczta FROM POCZTY";
+        String statement = "SELECT Nr_poczty, Kod_pocztowy, Poczta FROM POCZTY ORDER BY NR_POCZTY";
         rs = stmt.executeQuery(statement);
         
         while(rs.next()){
@@ -119,9 +119,9 @@ public class Poczty {
         if (atrybut.equalsIgnoreCase("Nr_poczty"))
             statement = "SELECT * FROM POCZTY WHERE nr_poczty = ?";
         else if (atrybut.equalsIgnoreCase("Kod_pocztowy"))
-            statement = "SELECT * FROM POCZTY WHERE kod_pocztowy = ?";
+            statement = "SELECT * FROM POCZTY WHERE kod_pocztowy = ? ORDER BY NR_POCZTY";
         else
-            statement = "SELECT * FROM POCZTY WHERE poczta = ?";
+            statement = "SELECT * FROM POCZTY WHERE poczta = ? ORDER BY NR_POCZTY";
         
         stmt = conn.prepareStatement(statement);
         stmt.setString(1, reqValue);

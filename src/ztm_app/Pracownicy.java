@@ -143,7 +143,7 @@ public class Pracownicy {
         ResultSet rs =null;
         
         stmt = conn.createStatement();
-        String statement = "SELECT * FROM PRACOWNICY";
+        String statement = "SELECT * FROM PRACOWNICY ORDER BY NR_PRACOWNIKA";
         rs = stmt.executeQuery(statement);
         
         while(rs.next()){
@@ -277,9 +277,9 @@ public class Pracownicy {
         if (atrybut.equalsIgnoreCase("Nr_pracownika"))
             statement = "SELECT * FROM PRACOWNICY WHERE nr_pracownika = ?";
         else if (atrybut.equalsIgnoreCase("Imię"))
-            statement = "SELECT * FROM PRACOWNICY WHERE imię = ?";
+            statement = "SELECT * FROM PRACOWNICY WHERE imię = ? ORDER BY NR_PRACOWNIKA";
         else
-            statement = "SELECT * FROM PRACOWNICY WHERE Nazwisko = ?";
+            statement = "SELECT * FROM PRACOWNICY WHERE Nazwisko = ? ORDER BY NR_PRACOWNIKA";
         
         stmt = conn.prepareStatement(statement);
         stmt.setString(1, reqValue);
