@@ -102,6 +102,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         infoLabel = new javax.swing.JLabel();
         commitButton = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
@@ -181,6 +182,9 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         jLabel23.setForeground(new java.awt.Color(255, 34, 34));
         jLabel23.setText("*");
 
+        jLabel24.setForeground(new java.awt.Color(255, 34, 34));
+        jLabel24.setText("*");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,7 +205,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ulicaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lokalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,7 +237,10 @@ public class FormularzPracownicy extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 13, Short.MAX_VALUE))))
-                    .addComponent(miejscowoscLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(miejscowoscLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
@@ -257,7 +264,8 @@ public class FormularzPracownicy extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(miejscowoscLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ulicaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,7 +328,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -364,25 +372,27 @@ public class FormularzPracownicy extends javax.swing.JFrame {
     private void commitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitButtonActionPerformed
         Pracownicy prac = new Pracownicy();
         
-        if (budynekLabel.getText().trim().isEmpty() || imieLabel.getText().trim().isEmpty() || nazwiskoLabel.getText().trim().isEmpty() || nrPocztyLabel.getText().trim().isEmpty() || nrStanowiskaLabel.getText().trim().isEmpty() || nrZarzadLabel.getText().trim().isEmpty() || telefonLabel.getText().trim().isEmpty() || zatrudnienieLabel.getText().trim().isEmpty() || miejscowoscLabel.getText().trim().isEmpty()){
+        if (miejscowoscLabel.getText().trim().isEmpty() || budynekLabel.getText().trim().isEmpty() || imieLabel.getText().trim().isEmpty() || nazwiskoLabel.getText().trim().isEmpty() || nrPocztyLabel.getText().trim().isEmpty() || nrStanowiskaLabel.getText().trim().isEmpty() || nrZarzadLabel.getText().trim().isEmpty() || telefonLabel.getText().trim().isEmpty() || zatrudnienieLabel.getText().trim().isEmpty() || miejscowoscLabel.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (ulicaLabel.getText().trim().isEmpty()) prac.setUlica("NULL");
+        else prac.setUlica(ulicaLabel.getText().trim());
+            
         if (lokalLabel.getText().trim().isEmpty()) prac.setNrLokalu("NULL");
+        else  prac.setNrLokalu(lokalLabel.getText().trim());
+        
         if (urodzenieLabel.getText().trim().isEmpty()) prac.setDataUrodzenia("NULL");
+        else prac.setDataUrodzenia(urodzenieLabel.getText().trim());
         
         prac.setNrBudynku(budynekLabel.getText().trim());
         prac.setImie(imieLabel.getText().trim());
         prac.setNazwisko(nazwiskoLabel.getText().trim());
-        prac.setNrLokalu(lokalLabel.getText().trim());
         prac.setNrPoczty(Integer.parseInt(nrPocztyLabel.getText().trim()));
         prac.setNrPracownika(Integer.parseInt(nrPracownikaLabel.getText().trim()));
         prac.setNrStanowiska(Integer.parseInt(nrStanowiskaLabel.getText().trim()));
         prac.setNrZarzadu(Integer.parseInt(nrZarzadLabel.getText().trim()));
         prac.setNrTelefonu(telefonLabel.getText().trim());
-        prac.setUlica(ulicaLabel.getText().trim());
-        prac.setDataUrodzenia(urodzenieLabel.getText().trim());
         prac.setDataZatrudnienia(zatrudnienieLabel.getText().trim());
         prac.setMiejscowosc(miejscowoscLabel.getText().trim());
         
@@ -431,6 +441,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
