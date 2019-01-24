@@ -349,37 +349,11 @@ public class adminWindow extends javax.swing.JFrame {
         if (userOption == JOptionPane.YES_OPTION){
             userOption = JOptionPane.showConfirmDialog(this, "Jestes pewien?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (userOption == JOptionPane.YES_OPTION){
-                userOption = JOptionPane.showConfirmDialog(this, "Na pewno nie zmieniłeś zdania?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (userOption == JOptionPane.YES_OPTION){
-                    userOption = JOptionPane.showConfirmDialog(this, "Ostatnia szansa, żeby się wycofać", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                    if (userOption == JOptionPane.YES_OPTION){
-                        userOption = JOptionPane.showConfirmDialog(this, "Więcej razy nie zapytam", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                        if (userOption == JOptionPane.YES_OPTION){
-                            userOption = JOptionPane.showConfirmDialog(this, "Dlaczego mi to robisz?", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                            if (userOption == JOptionPane.YES_OPTION){
-                                userOption = JOptionPane.showConfirmDialog(this, "Jaz zostaniesz to dostaniesz premię, wystarczy, że klikniesz No", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                                if (userOption == JOptionPane.YES_OPTION){
-                                    userOption = JOptionPane.showConfirmDialog(this, "No dobra, dostaniesz awans, kliknij No", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                                    if (userOption == JOptionPane.YES_OPTION){
-                                        userOption = JOptionPane.showConfirmDialog(this, "Przycisk Yes się zaciął, kliknij No, żeby się wylogować", "Wylogowywanie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                                        if (userOption == JOptionPane.YES_OPTION){
-                                            JOptionPane.showMessageDialog(this,"Ahh.. Niech Ci będzie... ;(","Wylogowano",JOptionPane.INFORMATION_MESSAGE);
-                                            try{
-                                                conn.close();
-                                            } catch(SQLException exc){
-
-                                            }
-                                            this.dispose();
-                                        } else if(userOption == JOptionPane.NO_OPTION){
-                                            JOptionPane.showMessageDialog(this,"Naiwniak xD","Nie ma wylogowywania się",JOptionPane.INFORMATION_MESSAGE);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                try{
+                    conn.close();
+                } catch(SQLException exc){
                 }
-
+                this.dispose();
             }
         }
     }//GEN-LAST:event_logOutButtonActionPerformed
@@ -596,7 +570,7 @@ public class adminWindow extends javax.swing.JFrame {
             }
         }
         catch(SQLException exc){
-            JOptionPane.showMessageDialog(this,"Nie udało się połączyć z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Nie znaleziono danych","Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_searchByButtonActionPerformed
 

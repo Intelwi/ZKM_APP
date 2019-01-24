@@ -110,7 +110,7 @@ public class Poczty {
         return result;
     }
     
-    public List<Poczty> getPocztyBy(Connection conn, String atrybut, String reqValue) throws SQLException {
+    public List<Poczty> getPocztyBy(Connection conn, String atrybut, String reqValue) throws SQLException{
         List <Poczty> pocztyList = new ArrayList();
         PreparedStatement stmt = null;
         ResultSet rs =null;
@@ -123,19 +123,17 @@ public class Poczty {
         else
             statement = "SELECT * FROM POCZTY WHERE poczta = ?";
         
-        System.out.println(reqValue);
-        
         stmt = conn.prepareStatement(statement);
         stmt.setString(1, reqValue);
         rs = stmt.executeQuery();
-        
+       
         while(rs.next()){
-            Poczty poczta = new Poczty();
-            poczta.setNrPoczty(rs.getInt(1));            
-            poczta.setKodPocztowy(rs.getString(2));            
-            poczta.setPoczta(rs.getString(3));
-
-            pocztyList.add(poczta);
+                Poczty poczta = new Poczty();
+                poczta.setNrPoczty(rs.getInt(1));            
+                poczta.setKodPocztowy(rs.getString(2));            
+                poczta.setPoczta(rs.getString(3));
+                
+                pocztyList.add(poczta);
         }
         
         return pocztyList;

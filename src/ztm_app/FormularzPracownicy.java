@@ -33,6 +33,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         this.isToAdd = isToAdd;
         nrPracownikaLabel.setText(ID.toString());
         this.setLocationRelativeTo(adminFormular);
+        nrPracownikaLabel.setEnabled(true);
     }
     
     public FormularzPracownicy(Connection conn, Pracownicy pracownik, adminWindow admin, Boolean isToAdd) {
