@@ -80,7 +80,7 @@ public class Wynagrodzenia {
                 wynagrodzenie.setNrWynagrodzenia(rs.getInt(1));            
                 wynagrodzenie.setKwotaPodstawowa(rs.getFloat(2));            
                 wynagrodzenie.setPremia(rs.getFloat(3));
-                wynagrodzenie.setDataWynagrodzenia(rs.getString(4));
+                wynagrodzenie.setDataWynagrodzenia(rs.getString(4).substring(0, 10));
                 wynagrodzenie.setNrPracownika(rs.getInt(5));
                 
                 wynagrodzeniaList.add(wynagrodzenie);
@@ -116,7 +116,7 @@ public class Wynagrodzenia {
         PreparedStatement stmt = null;
         int result;
         
-        String statement = "UPDATE Wynagrodzenia set kwota_postawowa = ?, premia = ?, data_wynagrodzenia = ?, nr_pracownika = ? WHERE nr_wynagrodzenia = ?";
+        String statement = "UPDATE Wynagrodzenia set kwota_podstawowa = ?, premia = ?, data_wynagrodzenia = ?, nr_pracownika = ? WHERE nr_wynagrodzenia = ?";
         try{
             stmt = conn.prepareStatement(statement);
             stmt.setFloat(1, wyn.KwotaPodstawowa);

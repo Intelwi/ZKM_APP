@@ -125,7 +125,7 @@ public class adminWindow extends javax.swing.JFrame {
         mainTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablePane2.setViewportView(mainTable2);
 
-        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pracownicy", "Zarzad", "Wynagrodzenia" }));
+        jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pracownicy", "Poczty", "Wynagrodzenia" }));
         jComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxActionPerformed(evt);
@@ -291,7 +291,7 @@ public class adminWindow extends javax.swing.JFrame {
         //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularzPoczty(maxID,adminForm,isToAdd).setVisible(true);
+                new FormularzPoczty(conn,maxID,adminForm,isToAdd).setVisible(true);
             }
         });    
     }
@@ -300,7 +300,7 @@ public class adminWindow extends javax.swing.JFrame {
         //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularzPoczty(poczta,adminForm,isToAdd).setVisible(true);
+                new FormularzPoczty(conn,poczta,adminForm,isToAdd).setVisible(true);
             }
         });    
     }
@@ -385,7 +385,8 @@ public class adminWindow extends javax.swing.JFrame {
                 }
             }
             poczt.setNrPoczty(maxID + 1);
-            // Wywolanie okna i add po zatwierdzeniu
+            createPocztyForm(maxID+1,true);
+            
         } else if (option == 2){
             Wynagrodzenia wyn = new Wynagrodzenia();
             List <Wynagrodzenia> wynagrodzeniaList = new ArrayList();
@@ -426,7 +427,8 @@ public class adminWindow extends javax.swing.JFrame {
                 return;
             }
             poczt = (Poczty)mainTable2.getValueAt(i, -1);
-            // Wywolanie okna i update po zatwierdzeniu
+            createPocztyForm(poczt, false);
+
         } else if (option == 2){
             Wynagrodzenia wyn = new Wynagrodzenia();
             int i = mainTable2.getSelectedRow();

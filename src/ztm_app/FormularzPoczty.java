@@ -5,6 +5,7 @@
  */
 package ztm_app;
 
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,28 +20,31 @@ public class FormularzPoczty extends javax.swing.JFrame {
     
     private adminWindow adminFormular; 
     private Boolean isToAdd;
+    private Connection conn;
     
     public FormularzPoczty() {
         initComponents();
         this.setLocationRelativeTo(adminFormular);
     }
 
-    public FormularzPoczty(Integer ID, adminWindow admin, Boolean isToAdd) {
+    public FormularzPoczty(Connection conn, Integer ID, adminWindow admin, Boolean isToAdd) {
         initComponents();
+        this.conn = conn;
         this.setLocationRelativeTo(adminFormular);
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrPocztyLabel.setText(ID.toString());
     }
     
-    public FormularzPoczty(Poczty poczta, adminWindow admin, Boolean isToAdd) {
+    public FormularzPoczty(Connection conn, Poczty poczta, adminWindow admin, Boolean isToAdd) {
         initComponents();
+        this.conn = conn;
         this.setLocationRelativeTo(adminFormular);
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrPocztyLabel.setText(poczta.getNrPoczty().toString());
         kodPocztowyLabel.setText(poczta.getKodPocztowy().toString());
-        pocztaLabel.setText(poczta.getKodPocztowy().toString());
+        pocztaLabel.setText(poczta.getPoczta().toString());
     }
 
     /**
@@ -198,6 +202,23 @@ public class FormularzPoczty extends javax.swing.JFrame {
         poczta.setNrPoczty(Integer.parseInt(nrPocztyLabel.getText().trim()));
         poczta.setKodPocztowy(kodPocztowyLabel.getText().trim());
         poczta.setPoczta(pocztaLabel.getText().trim());
+        
+        if (isToAdd){
+            if (poczta.addPoczta(conn, poczta) != 0){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie dodany do bazy danych","Sukces",JOptionPane.INFORMATION_MESSAGE);
+                adminFormular.setEnabled(true);
+                this.dispose();
+            } else 
+                JOptionPane.showMessageDialog(this,"Nie udało się dodać rekordu do bazy danych","Błąd",JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (poczta.updatePoczty(conn, poczta) != 0){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie zmodyfikowany","Sukces",JOptionPane.INFORMATION_MESSAGE);
+                adminFormular.setEnabled(true);
+                this.dispose();
+            } else 
+                JOptionPane.showMessageDialog(this,"Nie udało się zmodyfikować rekordu","Błąd",JOptionPane.WARNING_MESSAGE);
+        }
+        adminFormular.refreshTable();
     }//GEN-LAST:event_commitButtonActionPerformed
 
 

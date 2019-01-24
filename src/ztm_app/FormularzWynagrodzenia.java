@@ -38,7 +38,7 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
         this.conn = conn;
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
-        nrWynagrodzeniaLabel.setText(wyn.getNrPracownika().toString());
+        nrWynagrodzeniaLabel.setText(wyn.getNrWynagrodzenia().toString());
         kwotaPodstawowaLabel.setText(wyn.getKwotaPodstawowa().toString());
         nrPracownikaLabel.setText(wyn.getNrPracownika().toString());
         premiaLabel.setText(wyn.getPremia().toString());
