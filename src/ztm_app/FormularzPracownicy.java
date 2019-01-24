@@ -53,7 +53,6 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         nrZarzadLabel.setText(pracownik.getNrZarzadu().toString());
         nrPocztyLabel.setText(pracownik.getNrPoczty().toString());
         nrStanowiskaLabel.setText(pracownik.getNrStanowiska().toString());
-        //miejscowoscLabel.setText(pracownik.getMiejscowosc().toString());
         this.setLocationRelativeTo(adminFormular);
     }
     
@@ -365,7 +364,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
     private void commitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitButtonActionPerformed
         Pracownicy prac = new Pracownicy();
         
-        if (budynekLabel.getText().trim().isEmpty() || imieLabel.getText().trim().isEmpty() || nazwiskoLabel.getText().trim().isEmpty() || nrPocztyLabel.getText().trim().isEmpty() || nrStanowiskaLabel.getText().trim().isEmpty() || nrZarzadLabel.getText().trim().isEmpty() || telefonLabel.getText().trim().isEmpty() || zatrudnienieLabel.getText().trim().isEmpty()){
+        if (budynekLabel.getText().trim().isEmpty() || imieLabel.getText().trim().isEmpty() || nazwiskoLabel.getText().trim().isEmpty() || nrPocztyLabel.getText().trim().isEmpty() || nrStanowiskaLabel.getText().trim().isEmpty() || nrZarzadLabel.getText().trim().isEmpty() || telefonLabel.getText().trim().isEmpty() || zatrudnienieLabel.getText().trim().isEmpty() || miejscowoscLabel.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this,"Obowiązkowe pola nie zostały wypełnione","Błąd",JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -385,8 +384,7 @@ public class FormularzPracownicy extends javax.swing.JFrame {
         prac.setUlica(ulicaLabel.getText().trim());
         prac.setDataUrodzenia(urodzenieLabel.getText().trim());
         prac.setDataZatrudnienia(zatrudnienieLabel.getText().trim());
-        //prac.setMiejscowosc(miejscowoscLabel.getText().trim());
-        prac.setMiejscowosc("Warszawa"); // To do wykasowania jak linia powyzej bedzie gotowa
+        prac.setMiejscowosc(miejscowoscLabel.getText().trim());
         
         if (isToAdd){
             if (prac.addPracownik(conn, prac) != 0){

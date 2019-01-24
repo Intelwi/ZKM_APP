@@ -89,8 +89,8 @@ public class adminWindow extends javax.swing.JFrame {
                     .addGroup(topPanelLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
-                .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(411, 411, 411)
+                .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         topPanelLayout.setVerticalGroup(
@@ -102,13 +102,14 @@ public class adminWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
                 .addGap(0, 21, Short.MAX_VALUE)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(logOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(userNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logOutButton)))
         );
 
         choiceLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         choiceLabel2.setText("Wybierz informacje jakie chcesz wyszukać:");
 
+        mainTable2.setAutoCreateRowSorter(true);
         mainTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -121,6 +122,7 @@ public class adminWindow extends javax.swing.JFrame {
             }
         ));
         mainTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        mainTable2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablePane2.setViewportView(mainTable2);
 
         jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pracownicy", "Zarzad", "Wynagrodzenia" }));
@@ -237,7 +239,7 @@ public class adminWindow extends javax.swing.JFrame {
                 mainTable2.setModel(new PracownicyTableModel(new Pracownicy().getAll(conn)));
                 break;
                 case 1:
-                mainTable2.setModel(new ZKMTableModel(new ZKM().getAll(conn)));
+                mainTable2.setModel(new PocztyTableModel(new Poczty().getAll(conn)));
                 break;
                 case 2:
                 mainTable2.setModel(new WynagrodzeniaTableModel(new Wynagrodzenia().getAll(conn)));
@@ -350,19 +352,21 @@ public class adminWindow extends javax.swing.JFrame {
             
             
         } else if (option == 1){
-            ZKM zkm = new ZKM();
-            List <ZKM> zkmList = new ArrayList();
+           Poczty poczt = new Poczty();
+            List <Poczty> pocztList = new ArrayList();
+            int maxID = 0;
             try{
-                zkmList = zkm.getAll(conn);
+                pocztList = poczt.getAll(conn);
             } catch (SQLException exc){
                 JOptionPane.showMessageDialog(this,"Wystąpił nieoczekiwany błąd połączenia","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (zkmList.size() != 0){
-                JOptionPane.showMessageDialog(this,"Nie można dodać więcej niż jednego zarządu","Błąd",JOptionPane.INFORMATION_MESSAGE);
-                return;
+            for (int i = 0; i < pocztList.size(); ++i){
+                if (pocztList.get(i).getNrPoczty()> maxID){
+                    maxID = pocztList.get(i).getNrPoczty();
+                }
             }
-            zkm.setNrZarzadu(1);
+            poczt.setNrPoczty(maxID + 1);
             // Wywolanie okna i add po zatwierdzeniu
         } else if (option == 2){
             Wynagrodzenia wyn = new Wynagrodzenia();

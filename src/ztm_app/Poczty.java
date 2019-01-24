@@ -60,4 +60,53 @@ public class Poczty {
         
         return pocztyList;
     }
+    int updatePoczty(Connection conn, Poczty poczt){
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "UPDATE Poczty SET kod_pocztowy = ?, poczta = ? WHERE nr_poczty = ?";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setString(1, poczt.KodPocztowy);
+            stmt.setString(2, poczt.Poczta);
+            stmt.setInt(3, poczt.NrPoczty);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
+    
+    int deletePoczta(Connection conn, Integer ID){
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "DELETE FROM Poczty WHERE nr_poczty = ?";
+        try{
+            stmt = conn.prepareStatement(statement);
+            stmt.setInt(1, ID);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
+    
+    int addPoczta(Connection conn, Poczty poczt) {
+        PreparedStatement stmt = null;
+        int result;
+        
+        String statement = "INSERT INTO Poczty VALUES (?,?,?)";
+        try{
+            stmt = conn.prepareStatement(statement);
+            
+            stmt.setInt(1, poczt.NrPoczty);
+            stmt.setString(2, poczt.KodPocztowy);
+            stmt.setString(3, poczt.Poczta);
+            result = stmt.executeUpdate();
+        } catch (SQLException exc){
+            result = 0;
+        }
+        return result;
+    }
 }

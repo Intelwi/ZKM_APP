@@ -33,6 +33,9 @@ public class PocztyTableModel extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Poczty poczta = new Poczty();
         poczta = pocztyList.get(rowIndex);
+        if(columnIndex == -1){
+            return poczta;
+        }
         switch(columnIndex){
             case 0: return poczta.getNrPoczty();
             case 1: return poczta.getKodPocztowy();

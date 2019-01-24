@@ -156,8 +156,8 @@ public class Pracownicy {
                 pracownik.setNrBudynku(rs.getString(6));
                 pracownik.setNrLokalu(rs.getString(7));
                 pracownik.setNrTelefonu(rs.getString(8));
-                pracownik.setDataUrodzenia(rs.getString(9));
-                pracownik.setDataZatrudnienia(rs.getString(10));
+                pracownik.setDataUrodzenia(rs.getString(9).substring(0, 10));
+                pracownik.setDataZatrudnienia(rs.getString(10).substring(0, 10));
                 pracownik.setNrZarzadu(rs.getInt(11));
                 pracownik.setNrPoczty(rs.getInt(12));
                 pracownik.setNrStanowiska(rs.getInt(13));
