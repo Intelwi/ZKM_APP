@@ -6,6 +6,7 @@
 package ztm_app;
 
 import javax.swing.JOptionPane;
+import java.sql.*;
 
 /**
  *
@@ -15,23 +16,26 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
     
     private adminWindow adminFormular; 
     private Boolean isToAdd;
+    private Connection conn;
     
     public FormularzWynagrodzenia() {
         initComponents();
         this.setLocationRelativeTo(adminFormular);
     }
 
-    public FormularzWynagrodzenia(Integer ID, adminWindow admin, Boolean isToAdd) {
+    public FormularzWynagrodzenia(Connection conn, Integer ID, adminWindow admin, Boolean isToAdd) {
         initComponents();
         this.setLocationRelativeTo(adminFormular);
+        this.conn = conn;
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrWynagrodzeniaLabel.setText(ID.toString());
     }
     
-    public FormularzWynagrodzenia(Wynagrodzenia wyn, adminWindow admin, Boolean isToAdd) {
+    public FormularzWynagrodzenia(Connection conn, Wynagrodzenia wyn, adminWindow admin, Boolean isToAdd) {
         initComponents();
         this.setLocationRelativeTo(adminFormular);
+        this.conn = conn;
         this.adminFormular = admin;
         this.isToAdd = isToAdd;
         nrWynagrodzeniaLabel.setText(wyn.getNrPracownika().toString());
@@ -248,6 +252,22 @@ public class FormularzWynagrodzenia extends javax.swing.JFrame {
         wyn.setDataWynagrodzenia(dataWynagrodzeniaLabel.getText().trim());
         wyn.setNrPracownika(Integer.parseInt(nrPracownikaLabel.getText().trim()));
         
+        if (isToAdd){
+            if (wyn.addWynagrodzenie(conn, wyn) != 0){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie dodany do bazy danych","Sukces",JOptionPane.INFORMATION_MESSAGE);
+                adminFormular.setEnabled(true);
+                this.dispose();
+            } else 
+                JOptionPane.showMessageDialog(this,"Nie udało się dodać rekordu do bazy danych","Błąd",JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (wyn.updateWynagrodzenie(conn, wyn) != 0){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie zmodyfikowany","Sukces",JOptionPane.INFORMATION_MESSAGE);
+                adminFormular.setEnabled(true);
+                this.dispose();
+            } else 
+                JOptionPane.showMessageDialog(this,"Nie udało się zmodyfikować rekordu","Błąd",JOptionPane.WARNING_MESSAGE);
+        }
+        adminFormular.refreshTable();
            
     }//GEN-LAST:event_commitButtonActionPerformed
 

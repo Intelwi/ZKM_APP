@@ -273,7 +273,7 @@ public class adminWindow extends javax.swing.JFrame {
         //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularzWynagrodzenia(maxID,adminForm,isToAdd).setVisible(true);
+                new FormularzWynagrodzenia(conn, maxID,adminForm,isToAdd).setVisible(true);
             }
         });    
     }
@@ -282,7 +282,7 @@ public class adminWindow extends javax.swing.JFrame {
         //this.setEnabled(false);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularzWynagrodzenia(wynagrodzenie,adminForm,isToAdd).setVisible(true);
+                new FormularzWynagrodzenia(conn, wynagrodzenie,adminForm,isToAdd).setVisible(true);
             }
         });    
     }
@@ -419,13 +419,13 @@ public class adminWindow extends javax.swing.JFrame {
             createPracownikForm(prac,false);
                     
         } else if (option == 1){
-            ZKM zkm = new ZKM();
+            Poczty poczt = new Poczty();
             int i = mainTable2.getSelectedRow();
             if (i < 0){
                 JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            zkm = (ZKM)mainTable2.getValueAt(i, -1);
+            poczt = (Poczty)mainTable2.getValueAt(i, -1);
             // Wywolanie okna i update po zatwierdzeniu
         } else if (option == 2){
             Wynagrodzenia wyn = new Wynagrodzenia();
@@ -468,7 +468,25 @@ public class adminWindow extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Nie udało się usunąć rekordu, sprawdź połączenie z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
             }
         } else if (option == 1){
-             JOptionPane.showMessageDialog(this,"Nie można usunąć zarządu, rozważ modyfikację","Error",JOptionPane.INFORMATION_MESSAGE);
+            Poczty poczt = new Poczty();
+            int i = mainTable2.getSelectedRow();
+            int userOption;
+            Integer ID;
+            if (i < 0){
+                JOptionPane.showMessageDialog(this,"Nie wybrano żadnego rekordu","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            userOption = JOptionPane.showConfirmDialog(this, "Czy na pewno chcesz usunąć wybrany rekord?", "Potwierdzenie",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (userOption == JOptionPane.NO_OPTION){
+                return;
+            }
+            ID = (Integer)mainTable2.getValueAt(i, 0);
+            
+            if (poczt.deletePoczta(conn, ID) == 1){
+                JOptionPane.showMessageDialog(this,"Rekord został pomyślnie usunięty","Sukces!",JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,"Nie udało się usunąć rekordu, sprawdź połączenie z bazą danych","Error",JOptionPane.ERROR_MESSAGE);
+            } 
         } else if (option == 2){
             Wynagrodzenia wyn = new Wynagrodzenia();
             int i = mainTable2.getSelectedRow();
@@ -483,7 +501,7 @@ public class adminWindow extends javax.swing.JFrame {
                 return;
             }
             ID = (Integer)mainTable2.getValueAt(i, 0);
-            // Wywolanie okna i update po zatwierdzeniu
+            
             if (wyn.deleteWynagrodzenie(conn, ID) == 1){
                 JOptionPane.showMessageDialog(this,"Rekord został pomyślnie usunięty","Sukces!",JOptionPane.INFORMATION_MESSAGE);
             } else {
