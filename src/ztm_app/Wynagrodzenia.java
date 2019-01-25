@@ -104,7 +104,7 @@ public class Wynagrodzenia {
             wynagrodzenie.setNrWynagrodzenia(rs.getInt(1));            
             wynagrodzenie.setKwotaPodstawowa(rs.getFloat(2));            
             wynagrodzenie.setPremia(rs.getFloat(3));
-            wynagrodzenie.setDataWynagrodzenia(rs.getString(4));
+            wynagrodzenie.setDataWynagrodzenia(rs.getString(4).substring(0, 10));
             wynagrodzenie.setNrPracownika(rs.getInt(5));
                 
             wynagrodzeniaList.add(wynagrodzenie);
