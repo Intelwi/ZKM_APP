@@ -18,9 +18,9 @@ public class loginWindow extends javax.swing.JFrame {
      * Creates new form loginWindow
      */
     private Connection conn;
-    private String DB_URL = "jdbc:oracle:thin:@ora3.elka.pw.edu.pl:1521:ora3inf";
-    private String DB_USER = "dgruszcz";
-    private String DB_PASS = "dgruszcz";
+    private String DB_URL = "######";//enter database url
+    private String DB_USER = "######";//enter database user name
+    private String DB_PASS = "######";//enter database user password
     
     private String pracownikLogin = "prac";
     private String pracownikPass = "prac";
